@@ -518,7 +518,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                     <div className={`d-flex flex-column`}>
                       <figure>
                         <img
-                          src={`${profile.data.search_profiles[0].profileImages.length > 0 ? profile.data.search_profiles[0].profileImages[0].src : 'https://ipfs.io/ipfs/bafkreif5hdukwj7hnuxc5o53bjfkd3im4d7ygeah4a77i5ut5ke3zyj4lu'}`}
+                          src={`${profile.data.search_profiles[0].profileImages.length > 0 ? profile.data.search_profiles[0].profileImages[0].src : 'https://ipfs.io/ipfs/bafkreihdpxu5e77tfkekpq24wtu4pplhdw3ssdvuwatexs42hyxeh3enei'}`}
                           className={`rounded`}
                           style={{ width: `48px` }}
                           alt=""
