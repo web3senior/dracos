@@ -1456,7 +1456,7 @@
 			"author": "Aratta Labs",
 			"custom:emoji": "🐲",
 			"custom:security-contact": "atenyun@gmail.com",
-			"details": "You will find the deployed contract addresses in the repo",
+			"details": "Deployed contract addresses are available in the project repository.",
 			"errors": {
 				"ERC725Y_DataKeysValuesEmptyArray()": [
 					{
@@ -1931,7 +1931,7 @@
 					"notice": "Withdraw the balance from this contract to the owner's address"
 				}
 			},
-			"notice": "Dracos contract",
+			"notice": "A contract for managing the Dracos NFT collection, enabling minting, swiping, and distribution.",
 			"version": 1
 		}
 	},
@@ -2216,11 +2216,11 @@
 			]
 		},
 		"Dracos.sol": {
-			"keccak256": "0x8c8eef49684905f0d18741941b898241bdf308cca03d0803dc7e9921336ac51e",
+			"keccak256": "0x7aceeba98e385438018011b3687cd11100b706c4cec569eb40ed0a0aca975a11",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5545c8fa11fe087e4fb11d2bbfef4d57a757000a65256b869bc21f16f82b9a06",
-				"dweb:/ipfs/QmZqA8YmL4ggnJqXpxXs53UpJdiLpnDfiSTBiUz6tmj2Wd"
+				"bzz-raw://95e4a6aed379f724e4c517af3aa24c4fea364bdc2394d5883e23af13a6d7360c",
+				"dweb:/ipfs/QmeuT4oG45t4yPnr2LJM92V8gZ7XNQEM6ezLyHpaHbfjNo"
 			]
 		},
 		"Error.sol": {
