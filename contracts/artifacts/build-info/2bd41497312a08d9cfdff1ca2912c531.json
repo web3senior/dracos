@@ -1,0 +1,345 @@
+{
+	"id": "2bd41497312a08d9cfdff1ca2912c531",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.28",
+	"solcLongVersion": "0.8.28+commit.7893614a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"Event.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.28;\r\n\r\nevent MintPriceUpdated(uint256  price, address owner);\r\nevent SwipePriceUpdated(uint256  price, address owner );\r\nevent TeamUpdated(string key, address addr);\r\nevent metadataChanged(bytes);\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": true,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"Event.sol": {
+				"ast": {
+					"absolutePath": "Event.sol",
+					"exportedSymbols": {
+						"MintPriceUpdated": [
+							7
+						],
+						"SwipePriceUpdated": [
+							13
+						],
+						"TeamUpdated": [
+							19
+						],
+						"metadataChanged": [
+							23
+						]
+					},
+					"id": 24,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".28"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:24:0"
+						},
+						{
+							"anonymous": false,
+							"eventSelector": "627f3f9abdceb64f973da0c4835eba8d0147329526e6325906e29601a203e63a",
+							"id": 7,
+							"name": "MintPriceUpdated",
+							"nameLocation": "67:16:0",
+							"nodeType": "EventDefinition",
+							"parameters": {
+								"id": 6,
+								"nodeType": "ParameterList",
+								"parameters": [
+									{
+										"constant": false,
+										"id": 3,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "price",
+										"nameLocation": "93:5:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 7,
+										"src": "84:14:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										},
+										"typeName": {
+											"id": 2,
+											"name": "uint256",
+											"nodeType": "ElementaryTypeName",
+											"src": "84:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"visibility": "internal"
+									},
+									{
+										"constant": false,
+										"id": 5,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "owner",
+										"nameLocation": "108:5:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 7,
+										"src": "100:13:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										},
+										"typeName": {
+											"id": 4,
+											"name": "address",
+											"nodeType": "ElementaryTypeName",
+											"src": "100:7:0",
+											"stateMutability": "nonpayable",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											}
+										},
+										"visibility": "internal"
+									}
+								],
+								"src": "83:31:0"
+							},
+							"src": "61:54:0"
+						},
+						{
+							"anonymous": false,
+							"eventSelector": "4e0225ff6ef5e95b2a87452ed36819ff10077c4f1562f7cd0e02ca890e8d0743",
+							"id": 13,
+							"name": "SwipePriceUpdated",
+							"nameLocation": "123:17:0",
+							"nodeType": "EventDefinition",
+							"parameters": {
+								"id": 12,
+								"nodeType": "ParameterList",
+								"parameters": [
+									{
+										"constant": false,
+										"id": 9,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "price",
+										"nameLocation": "150:5:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 13,
+										"src": "141:14:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										},
+										"typeName": {
+											"id": 8,
+											"name": "uint256",
+											"nodeType": "ElementaryTypeName",
+											"src": "141:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"visibility": "internal"
+									},
+									{
+										"constant": false,
+										"id": 11,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "owner",
+										"nameLocation": "165:5:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 13,
+										"src": "157:13:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										},
+										"typeName": {
+											"id": 10,
+											"name": "address",
+											"nodeType": "ElementaryTypeName",
+											"src": "157:7:0",
+											"stateMutability": "nonpayable",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											}
+										},
+										"visibility": "internal"
+									}
+								],
+								"src": "140:32:0"
+							},
+							"src": "117:56:0"
+						},
+						{
+							"anonymous": false,
+							"eventSelector": "a55bfbf28b3e4791376d4e67253f1743a34a31a8824092ec7dda235c4c5c6ec1",
+							"id": 19,
+							"name": "TeamUpdated",
+							"nameLocation": "181:11:0",
+							"nodeType": "EventDefinition",
+							"parameters": {
+								"id": 18,
+								"nodeType": "ParameterList",
+								"parameters": [
+									{
+										"constant": false,
+										"id": 15,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "key",
+										"nameLocation": "200:3:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 19,
+										"src": "193:10:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_memory_ptr",
+											"typeString": "string"
+										},
+										"typeName": {
+											"id": 14,
+											"name": "string",
+											"nodeType": "ElementaryTypeName",
+											"src": "193:6:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											}
+										},
+										"visibility": "internal"
+									},
+									{
+										"constant": false,
+										"id": 17,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "addr",
+										"nameLocation": "213:4:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 19,
+										"src": "205:12:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										},
+										"typeName": {
+											"id": 16,
+											"name": "address",
+											"nodeType": "ElementaryTypeName",
+											"src": "205:7:0",
+											"stateMutability": "nonpayable",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											}
+										},
+										"visibility": "internal"
+									}
+								],
+								"src": "192:26:0"
+							},
+							"src": "175:44:0"
+						},
+						{
+							"anonymous": false,
+							"eventSelector": "ef5f0d81ef4262ec3b7b67b7e5a17646a18db55002eed51f1de46cfb6ce9716c",
+							"id": 23,
+							"name": "metadataChanged",
+							"nameLocation": "227:15:0",
+							"nodeType": "EventDefinition",
+							"parameters": {
+								"id": 22,
+								"nodeType": "ParameterList",
+								"parameters": [
+									{
+										"constant": false,
+										"id": 21,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "",
+										"nameLocation": "-1:-1:-1",
+										"nodeType": "VariableDeclaration",
+										"scope": 23,
+										"src": "243:5:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_bytes_memory_ptr",
+											"typeString": "bytes"
+										},
+										"typeName": {
+											"id": 20,
+											"name": "bytes",
+											"nodeType": "ElementaryTypeName",
+											"src": "243:5:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_bytes_storage_ptr",
+												"typeString": "bytes"
+											}
+										},
+										"visibility": "internal"
+									}
+								],
+								"src": "242:7:0"
+							},
+							"src": "221:29:0"
+						}
+					],
+					"src": "33:219:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

@@ -1,0 +1,50 @@
+{
+  "LSP4Metadata": {
+    "name": "Dracos",
+    "description": "",
+    "links": [
+      { "title": "Website", "url": "https://" },
+      { "title": "Mint", "url": "https://" },
+      { "title": "Common Ground", "url": "https://" },
+      { "title": "𝕏", "url": "https://x.com" },
+      { "title": "Telegram", "url": "https://t.me" }
+    ],
+    "attributes": [
+      { "key": "Stage", "value": "3" },
+      { "key": "Type", "value": "Anuran" },
+      { "key": "Background", "value": "" },
+      { "key": "Skin", "value": "" },
+      { "key": "Eyes", "value": "" },
+      { "key": "Tattoos", "value": "" },
+      { "key": "Clothes", "value": "" },
+      { "key": "Headgear", "value": "" },
+      { "key": "Accessory", "value": "" }
+    ],
+    "icon": [
+      {
+        "width": 512,
+        "height": 512,
+        "url": "ipfs://QmdrcEfQnWZhisc2bF4544xdJGHBQhWLaoGBXZSvrvSTxT",
+        "verification": {
+          "method": "keccak256(bytes)",
+          "data": "0xeb14faa594192b57a2c4edb6ae212c1a6b3848409176e7c900141132d9902c85"
+        }
+      }
+    ],
+    "backgroundImage": [],
+    "assets": [],
+    "images": [
+      [
+        {
+          "width": 500,
+          "height": 500,
+          "url": "ipfs://QmQ6cX3WkNG17hmeSuzRQCHcKUeCkagMBUK87XTuMPd34b",
+          "verification": {
+            "method": "keccak256(bytes)",
+            "data": "0x2e1468fb9fdfe7adacd5ea0116bb4d232af1e7b9c923aa32145703036836eb52"
+          }
+        }
+      ]
+    ]
+  }
+}

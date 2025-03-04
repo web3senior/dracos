@@ -1,0 +1,371 @@
+{
+	"id": "108f7e70fccd9ab76cfdfa726d63ad09",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.28",
+	"solcLongVersion": "0.8.28+commit.7893614a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"_event.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.28;\r\n\r\nevent PriceUpdated(uint256 indexed newPrice, uint256 time);\r\nevent FeeUpdated(uint256 indexed newPrice, uint256 time);\r\nevent metadataChanged(bytes);\r\nevent TeamUpdate(string,address,uint256);"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"_event.sol": {
+				"ast": {
+					"absolutePath": "_event.sol",
+					"exportedSymbols": {
+						"FeeUpdated": [
+							13
+						],
+						"PriceUpdated": [
+							7
+						],
+						"TeamUpdate": [
+							25
+						],
+						"metadataChanged": [
+							17
+						]
+					},
+					"id": 26,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".28"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:24:0"
+						},
+						{
+							"anonymous": false,
+							"eventSelector": "945c1c4e99aa89f648fbfe3df471b916f719e16d960fcec0737d4d56bd696838",
+							"id": 7,
+							"name": "PriceUpdated",
+							"nameLocation": "67:12:0",
+							"nodeType": "EventDefinition",
+							"parameters": {
+								"id": 6,
+								"nodeType": "ParameterList",
+								"parameters": [
+									{
+										"constant": false,
+										"id": 3,
+										"indexed": true,
+										"mutability": "mutable",
+										"name": "newPrice",
+										"nameLocation": "96:8:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 7,
+										"src": "80:24:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										},
+										"typeName": {
+											"id": 2,
+											"name": "uint256",
+											"nodeType": "ElementaryTypeName",
+											"src": "80:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"visibility": "internal"
+									},
+									{
+										"constant": false,
+										"id": 5,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "time",
+										"nameLocation": "114:4:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 7,
+										"src": "106:12:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										},
+										"typeName": {
+											"id": 4,
+											"name": "uint256",
+											"nodeType": "ElementaryTypeName",
+											"src": "106:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"visibility": "internal"
+									}
+								],
+								"src": "79:40:0"
+							},
+							"src": "61:59:0"
+						},
+						{
+							"anonymous": false,
+							"eventSelector": "528d9479e9f9889a87a3c30c7f7ba537e5e59c4c85a37733b16e57c62df61302",
+							"id": 13,
+							"name": "FeeUpdated",
+							"nameLocation": "128:10:0",
+							"nodeType": "EventDefinition",
+							"parameters": {
+								"id": 12,
+								"nodeType": "ParameterList",
+								"parameters": [
+									{
+										"constant": false,
+										"id": 9,
+										"indexed": true,
+										"mutability": "mutable",
+										"name": "newPrice",
+										"nameLocation": "155:8:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 13,
+										"src": "139:24:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										},
+										"typeName": {
+											"id": 8,
+											"name": "uint256",
+											"nodeType": "ElementaryTypeName",
+											"src": "139:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"visibility": "internal"
+									},
+									{
+										"constant": false,
+										"id": 11,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "time",
+										"nameLocation": "173:4:0",
+										"nodeType": "VariableDeclaration",
+										"scope": 13,
+										"src": "165:12:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										},
+										"typeName": {
+											"id": 10,
+											"name": "uint256",
+											"nodeType": "ElementaryTypeName",
+											"src": "165:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"visibility": "internal"
+									}
+								],
+								"src": "138:40:0"
+							},
+							"src": "122:57:0"
+						},
+						{
+							"anonymous": false,
+							"eventSelector": "ef5f0d81ef4262ec3b7b67b7e5a17646a18db55002eed51f1de46cfb6ce9716c",
+							"id": 17,
+							"name": "metadataChanged",
+							"nameLocation": "187:15:0",
+							"nodeType": "EventDefinition",
+							"parameters": {
+								"id": 16,
+								"nodeType": "ParameterList",
+								"parameters": [
+									{
+										"constant": false,
+										"id": 15,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "",
+										"nameLocation": "-1:-1:-1",
+										"nodeType": "VariableDeclaration",
+										"scope": 17,
+										"src": "203:5:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_bytes_memory_ptr",
+											"typeString": "bytes"
+										},
+										"typeName": {
+											"id": 14,
+											"name": "bytes",
+											"nodeType": "ElementaryTypeName",
+											"src": "203:5:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_bytes_storage_ptr",
+												"typeString": "bytes"
+											}
+										},
+										"visibility": "internal"
+									}
+								],
+								"src": "202:7:0"
+							},
+							"src": "181:29:0"
+						},
+						{
+							"anonymous": false,
+							"eventSelector": "3443ec4cfd10a1e2ec278abbe6f8e8bb73e09faaf1eddd7f5b6b9c4fbd4040c8",
+							"id": 25,
+							"name": "TeamUpdate",
+							"nameLocation": "218:10:0",
+							"nodeType": "EventDefinition",
+							"parameters": {
+								"id": 24,
+								"nodeType": "ParameterList",
+								"parameters": [
+									{
+										"constant": false,
+										"id": 19,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "",
+										"nameLocation": "-1:-1:-1",
+										"nodeType": "VariableDeclaration",
+										"scope": 25,
+										"src": "229:6:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_memory_ptr",
+											"typeString": "string"
+										},
+										"typeName": {
+											"id": 18,
+											"name": "string",
+											"nodeType": "ElementaryTypeName",
+											"src": "229:6:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											}
+										},
+										"visibility": "internal"
+									},
+									{
+										"constant": false,
+										"id": 21,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "",
+										"nameLocation": "-1:-1:-1",
+										"nodeType": "VariableDeclaration",
+										"scope": 25,
+										"src": "236:7:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										},
+										"typeName": {
+											"id": 20,
+											"name": "address",
+											"nodeType": "ElementaryTypeName",
+											"src": "236:7:0",
+											"stateMutability": "nonpayable",
+											"typeDescriptions": {
+												"typeIdentifier": "t_address",
+												"typeString": "address"
+											}
+										},
+										"visibility": "internal"
+									},
+									{
+										"constant": false,
+										"id": 23,
+										"indexed": false,
+										"mutability": "mutable",
+										"name": "",
+										"nameLocation": "-1:-1:-1",
+										"nodeType": "VariableDeclaration",
+										"scope": 25,
+										"src": "244:7:0",
+										"stateVariable": false,
+										"storageLocation": "default",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										},
+										"typeName": {
+											"id": 22,
+											"name": "uint256",
+											"nodeType": "ElementaryTypeName",
+											"src": "244:7:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											}
+										},
+										"visibility": "internal"
+									}
+								],
+								"src": "228:24:0"
+							},
+							"src": "212:41:0"
+						}
+					],
+					"src": "33:220:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
