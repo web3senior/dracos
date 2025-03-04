@@ -517,7 +517,12 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                   <li className={`d-flex flex-row grid--gap-050`}>
                     <div className={`d-flex flex-column`}>
                       <figure>
-                        <img src={profile.data.search_profiles[0].profileImages[0].src} className={`rounded`} style={{ width: `48px` }} alt="" />
+                        <img
+                          src={`${profile.data.search_profiles[0].profileImages.length > 0 ? profile.data.search_profiles[0].profileImages[0].src : 'https://ipfs.io/ipfs/bafkreif5hdukwj7hnuxc5o53bjfkd3im4d7ygeah4a77i5ut5ke3zyj4lu'}`}
+                          className={`rounded`}
+                          style={{ width: `48px` }}
+                          alt=""
+                        />
                       </figure>
                     </div>
                     <div className={`d-flex flex-column`}>
@@ -638,7 +643,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                 </li>
               </ul>
 
-              {auth.walletConnected && <Whitelist setFreeMintCount={setFreeMintCount}/>}
+              {auth.walletConnected && <Whitelist setFreeMintCount={setFreeMintCount} />}
             </main>
 
             <footer className={`${styles.footer} grid grid--fit ms-motion-slideDownIn`} style={{ '--data-width': '200px' }}>
@@ -668,7 +673,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
   )
 }
 
-const Whitelist = ({setFreeMintCount}) => {
+const Whitelist = ({ setFreeMintCount }) => {
   const [status, setStatus] = useState(`loading`)
   const [count, setCount] = useState(0)
   const auth = useUpProvider()

@@ -2190,11 +2190,11 @@
 			]
 		},
 		"Dracos.sol": {
-			"keccak256": "0x9d1985f8b2b468df51bb3d8379e526dd99ecf4b7d4c2d907e09edf301dcdb04d",
+			"keccak256": "0x6fa1a49756d78334332f1a656c6d71d3e291e1732e573787975bb1a41f7ac050",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1bacd13e5f8c9e0eff2096575a447763f361228ad7c7b305993f736e79d4345b",
-				"dweb:/ipfs/QmRshPeH9sGNfVKqy6bdKcvBpTjzBqdUSmJCx7KmUETfzQ"
+				"bzz-raw://2a452d8085fa3cd802028b8a3f1d7234958a22e70929171d599e6f14a35c2d1f",
+				"dweb:/ipfs/Qmb3AngGUQGWYPFeUkBauDi7EjdsTaJa7bQBTETM1Z3nRo"
 			]
 		},
 		"Error.sol": {

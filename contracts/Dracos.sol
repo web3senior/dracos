@@ -100,6 +100,7 @@ contract Dracos is LSP8IdentifiableDigitalAsset("Dracos", "DRA", msg.sender, _LS
         whitelist[0xF76eF9e28aC9c7dbb89729e2F52d810B643B1576] = 1 * 5;
         whitelist[0xf269a00d8Cf862dDb881256D5F3292B4d91ff691] = 1 * 5;
         whitelist[0xFA00bA127034fE1c4962e93AA845d6cc902604DE] = 1 * 5;
+        whitelist[0xAd39ffbD42AB449ADCEEDB83e4Dfb4c238d5eaBD] = 2 * 5;
     }
 
     function updateSwipePrice(uint256 amount) public onlyOwner {
