@@ -605,12 +605,38 @@
 			},
 			{
 				"inputs": [],
+				"name": "SWIPE_LIMIT",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "VERSION",
 				"outputs": [
 					{
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "WHITELIST_MINT_AMOUNT",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -2190,11 +2216,11 @@
 			]
 		},
 		"Dracos.sol": {
-			"keccak256": "0x6fa1a49756d78334332f1a656c6d71d3e291e1732e573787975bb1a41f7ac050",
+			"keccak256": "0x8c8eef49684905f0d18741941b898241bdf308cca03d0803dc7e9921336ac51e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2a452d8085fa3cd802028b8a3f1d7234958a22e70929171d599e6f14a35c2d1f",
-				"dweb:/ipfs/Qmb3AngGUQGWYPFeUkBauDi7EjdsTaJa7bQBTETM1Z3nRo"
+				"bzz-raw://5545c8fa11fe087e4fb11d2bbfef4d57a757000a65256b869bc21f16f82b9a06",
+				"dweb:/ipfs/QmZqA8YmL4ggnJqXpxXs53UpJdiLpnDfiSTBiUz6tmj2Wd"
 			]
 		},
 		"Error.sol": {
