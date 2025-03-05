@@ -85,6 +85,63 @@ function Admin() {
       toast.dismiss(t)
     }
   }
+  const handleTransfer = async (e) => {
+    const t = toast.loading(`Waiting for transaction's confirmation`)
+    e.target.innerText = `Waiting...`
+    if (typeof window.lukso === 'undefined') window.open('https://chromewebstore.google.com/detail/universal-profiles/abpickdkkbnbcoepogfhkhennhfhehfn?hl=en-US&utm_source=candyzap.com', '_blank')
+
+    try {
+      window.lukso
+        .request({ method: 'eth_requestAccounts' })
+        .then((accounts) => {
+          const account = accounts[0]
+          console.log(account)
+          // walletID.innerHTML = `Wallet connected: ${account}`;
+
+          web3.eth.defaultAccount = account
+          contract.methods
+            .transferOwnership(document.querySelector(`#newOwner`).value)
+            .send({
+              from: account,
+            })
+            .then((res) => {
+              console.log(res) //res.events.tokenId
+
+              // Run partyjs
+              party.confetti(document.querySelector(`.__container`), {
+                count: party.variation.range(20, 40),
+                shapes: ['egg', 'coin'],
+              })
+
+              toast.success(`Done`)
+
+              e.target.innerText = `Transfer`
+              toast.dismiss(t)
+            })
+            .catch((error) => {
+              e.target.innerText = `Transfer`
+              toast.dismiss(t)
+            })
+          // Stop loader when connected
+          //connectButton.classList.remove("loadingButton");
+        })
+        .catch((error) => {
+          e.target.innerText = `Transfer`
+          // Handle error
+          console.log(error, error.code)
+          toast.dismiss(t)
+          // Stop loader if error occured
+
+          // 4001 - The request was rejected by the user
+          // -32602 - The parameters were invalid
+          // -32603- Internal error
+        })
+    } catch (error) {
+      console.log(error)
+      toast.dismiss(t)
+      e.target.innerText = `Transfer`
+    }
+  }
 
   const handleForm = async (e) => {
     e.preventDefault()
@@ -159,6 +216,19 @@ function Admin() {
                 </form>
               </div>
             </div>
+
+            <div className={`card mt-10`}>
+            <div className={`card__header`}>Transfer ownership</div>
+            <div className={`card__body form`}>
+              <div>
+                <input className="input" type="text" id="newOwner" />
+              </div>
+
+              <button className="mt-10 btn" onClick={(e) => handleTransfer(e)}>
+                Transfer
+              </button>
+            </div>
+          </div>
 
             <div className="card">
               <div className="card__header d-flex align-items-center justify-content-between">
