@@ -1,215 +1,214 @@
 {
-    "base": [
-      { "name": "none", "weight": 0 },
-  
-      { "name": "blue", "weight": 50 },
-      { "name": "brown", "weight": 50 },
-      { "name": "green", "weight": 50 },
-      { "name": "grey", "weight": 50 },
-      { "name": "purple", "weight": 50 },
-      { "name": "violet", "weight": 50 },
-      { "name": "yellow_green", "weight": 50 },
-  
-      { "name": "black_robot", "weight": 30 },
-      { "name": "crystal", "weight": 30 },
-      { "name": "glitch", "weight": 30 },
-      { "name": "silver_robot", "weight": 30 },
-      { "name": "tatted", "weight": 30 },
-  
-      { "name": "reptile", "weight": 15 },
-      { "name": "tiger", "weight": 15 },
-      { "name": "zombie", "weight": 15 },
-  
-      { "name": "alien", "weight": 5 },
-      { "name": "gold", "weight": 5 }
-    ],
-    "background": [
-      { "name": "none", "weight": 0 },
-  
-      { "name": "blue", "weight": 40 },
-      { "name": "gray", "weight": 40 },
-      { "name": "grey", "weight": 40 },
-      { "name": "purple", "weight": 40 },
-      { "name": "red", "weight": 40 },
-  
-      { "name": "chartreuse", "weight": 30 },
-      { "name": "electric_blue", "weight": 30 },
-      { "name": "magenta", "weight": 30 },
-      { "name": "orange_peel", "weight": 30 },
-      { "name": "peach", "weight": 30 },
-  
-      { "name": "shadow", "weight": 20 },
-      { "name": "sunset", "weight": 20 },
-  
-      { "name": "criminal", "weight": 10 },
-      { "name": "pink", "weight": 10 }
-    ],
-    "eyes": [
-      { "name": "none", "weight": 0 },
-  
-      { "name": "bloodshot", "weight": 40 },
-      { "name": "dragon", "weight": 40 },
-      { "name": "ski_goggles", "weight": 40 },
-      { "name": "sleepy", "weight": 40 },
-      { "name": "sunglasses", "weight": 40 },
-      { "name": "wide", "weight": 40 },
-  
-      { "name": "3d_glasses", "weight": 30 },
-      { "name": "birthmark", "weight": 30 },
-      { "name": "visor", "weight": 30 },
-      { "name": "vr_goggles", "weight": 30 },
-  
-      { "name": "bttf", "weight": 20 },
-      { "name": "fire", "weight": 20 },
-      { "name": "tyler_durden", "weight": 20 },
-  
-      { "name": "kano", "weight": 10 },
-      { "name": "laser", "weight": 10 }
-    ],
-    "mouth": [
-      { "name": "none", "weight": 0 },
-  
-      { "name": "beard", "weight": 40 },
-      { "name": "bubblegum", "weight": 40 },
-      { "name": "closed", "weight": 40 },
-      { "name": "fury", "weight": 40 },
-      { "name": "joint", "weight": 40 },
-      { "name": "sad", "weight": 40 },
-  
-      { "name": "rose", "weight": 30 },
-      { "name": "diamond_grill", "weight": 30 },
-      { "name": "pipe", "weight": 30 },
-      { "name": "rainbow_grill", "weight": 30 },
-  
-      { "name": "cyber_punk", "weight": 20 },
-      { "name": "hannibal", "weight": 20 },
-      { "name": "white_beard", "weight": 20 },
-  
-      { "name": "fire", "weight": 10 },
-      { "name": "gold_grill", "weight": 10 }
-    ],
-    "head": [
-      { "name": "none", "weight": 750 },
-  
-      { "name": "arrow", "weight": 20 },
-      { "name": "bandana", "weight": 20 },
-      { "name": "beanie", "weight": 20 },
-      { "name": "birthday", "weight": 20 },
-      { "name": "cowboy", "weight": 20 },
-      { "name": "festive", "weight": 20 },
-      { "name": "fox_mask", "weight": 20 },
-      { "name": "headphones", "weight": 20 },
-      { "name": "japanese_bandana", "weight": 20 },
-      { "name": "pilot", "weight": 20 },
-      { "name": "prisoner", "weight": 20 },
-      { "name": "rasta", "weight": 20 },
-      { "name": "silver_earring", "weight": 20 },
-      { "name": "trucker_hat", "weight": 20 },
-  
-      { "name": "arrow_head", "weight": 15 },
-      { "name": "bowler_hat", "weight": 15 },
-      { "name": "bunny_ears", "weight": 15 },
-      { "name": "devil_mask", "weight": 15 },
-      { "name": "dracuto", "weight": 15 },
-      { "name": "flowers", "weight": 15 },
-      { "name": "frog_mask", "weight": 15 },
-      { "name": "gold_earring", "weight": 15 },
-      { "name": "peaky", "weight": 15 },
-      { "name": "pirate", "weight": 15 },
-  
-      { "name": "devil_horns", "weight": 10 },
-      { "name": "metaheads", "weight": 10 },
-      { "name": "mohawk", "weight": 10 },
-      { "name": "raiden", "weight": 10 },
-      { "name": "trump", "weight": 10 },
-      { "name": "unicorn", "weight": 10 },
-  
-      { "name": "crown", "weight": 5 },
-      { "name": "halo", "weight": 5 },
-      { "name": "samurai_helmet", "weight": 5 }
-    ],
-    "clothing": [
-      { "name": "none", "weight": 200 },
-  
-      { "name": "aqua_hoodie", "weight": 40 },
-      { "name": "bomber_jacket", "weight": 40 },
-      { "name": "bulletproof_vest", "weight": 40 },
-      { "name": "cowboy", "weight": 40 },
-      { "name": "cyber_punk", "weight": 40 },
-      { "name": "doc", "weight": 40 },
-      { "name": "gigilo", "weight": 40 },
-      { "name": "green_hoodie", "weight": 40 },
-      { "name": "green_shirt", "weight": 40 },
-      { "name": "leather_jacket", "weight": 40 },
-      { "name": "neo", "weight": 40 },
-      { "name": "ninja", "weight": 40 },
-      { "name": "overalls", "weight": 40 },
-      { "name": "purple_hoodie", "weight": 40 },
-      { "name": "red_t", "weight": 40 },
-      { "name": "silver_chain", "weight": 40 },
-      { "name": "skeleton_jacket", "weight": 40 },
-      { "name": "spartan", "weight": 40 },
-      { "name": "squid", "weight": 40 },
-      { "name": "stock_broker", "weight": 40 },
-  
-      { "name": "ace", "weight": 30 },
-      { "name": "astro", "weight": 30 },
-      { "name": "beetle", "weight": 30 },
-      { "name": "burned_t", "weight": 30 },
-      { "name": "dress", "weight": 30 },
-      { "name": "dumb", "weight": 30 },
-      { "name": "dumber", "weight": 30 },
-      { "name": "freddy", "weight": 30 },
-      { "name": "fur_coat", "weight": 30 },
-      { "name": "gold_hoodie", "weight": 30 },
-      { "name": "hans", "weight": 30 },
-      { "name": "insane", "weight": 30 },
-      { "name": "lumbergh", "weight": 30 },
-      { "name": "rambo", "weight": 30 },
-      { "name": "red", "weight": 30 },
-      { "name": "robin_hood", "weight": 30 },
-      { "name": "wizerd", "weight": 30 },
-  
-      { "name": "barbie", "weight": 15 },
-      { "name": "bateman", "weight": 15 },
-      { "name": "castle", "weight": 15 },
-      { "name": "draku", "weight": 15 },
-      { "name": "godfather", "weight": 15 },
-      { "name": "gold_chain", "weight": 15 },
-      { "name": "homelander", "weight": 15 },
-      { "name": "joker", "weight": 15 },
-      { "name": "kill", "weight": 15 },
-      { "name": "panther", "weight": 15 },
-      { "name": "pink_hoodie", "weight": 15 },
-      { "name": "powers", "weight": 15 },
-      { "name": "ranger", "weight": 15 },
-      { "name": "superhero", "weight": 15 },
-      { "name": "toga", "weight": 15 },
-      { "name": "tyler_durden", "weight": 15 },
-  
-      { "name": "john_mcclane", "weight": 5 },
-      { "name": "samurai_armor", "weight": 5 },
-      { "name": "shang_tsung", "weight": 5 },
-      { "name": "snake", "weight": 5 },
-      { "name": "venom", "weight": 5 },
-      { "name": "mystique", "weight": 5 }
-    ],
-    "back": [
-      { "name": "none", "weight": 1000 },
-  
-      { "name": "medieval_sword", "weight": 15 },
-      { "name": "rpg", "weight": 15 },
-      { "name": "shield", "weight": 15 },
-      { "name": "wings", "weight": 15 },
-  
-      { "name": "angel", "weight": 10 },
-      { "name": "devil", "weight": 10 },
-      { "name": "katanas", "weight": 10 },
-  
-      { "name": "fire_wings", "weight": 7 },
-      { "name": "robot_arms", "weight": 7 },
-  
-      { "name": "gold_wings", "weight": 3 }
-    ]
-  }
-  
+  "base": [
+    { "name": "none", "weight": 0 },
+
+    { "name": "blue", "weight": 50 },
+    { "name": "brown", "weight": 50 },
+    { "name": "green", "weight": 50 },
+    { "name": "grey", "weight": 50 },
+    { "name": "purple", "weight": 50 },
+    { "name": "violet", "weight": 50 },
+    { "name": "yellow_green", "weight": 50 },
+
+    { "name": "black_robot", "weight": 30 },
+    { "name": "crystal", "weight": 30 },
+    { "name": "glitch", "weight": 30 },
+    { "name": "silver_robot", "weight": 30 },
+    { "name": "tatted", "weight": 30 },
+
+    { "name": "reptile", "weight": 15 },
+    { "name": "tiger", "weight": 15 },
+    { "name": "zombie", "weight": 15 },
+
+    { "name": "alien", "weight": 5 },
+    { "name": "gold", "weight": 5 }
+  ],
+  "background": [
+    { "name": "none", "weight": 0 },
+
+    { "name": "blue", "weight": 40 },
+    { "name": "gray", "weight": 40 },
+    { "name": "grey", "weight": 40 },
+    { "name": "purple", "weight": 40 },
+    { "name": "red", "weight": 40 },
+
+    { "name": "chartreuse", "weight": 30 },
+    { "name": "electric_blue", "weight": 30 },
+    { "name": "magenta", "weight": 30 },
+    { "name": "orange_peel", "weight": 30 },
+    { "name": "peach", "weight": 30 },
+
+    { "name": "shadow", "weight": 20 },
+    { "name": "sunset", "weight": 20 },
+
+    { "name": "criminal", "weight": 10 },
+    { "name": "pink", "weight": 10 }
+  ],
+  "eyes": [
+    { "name": "none", "weight": 0 },
+
+    { "name": "bloodshot", "weight": 40 },
+    { "name": "dragon", "weight": 40 },
+    { "name": "ski_goggles", "weight": 40 },
+    { "name": "sleepy", "weight": 40 },
+    { "name": "sunglasses", "weight": 40 },
+    { "name": "wide", "weight": 40 },
+
+    { "name": "3d_glasses", "weight": 30 },
+    { "name": "birthmark", "weight": 30 },
+    { "name": "visor", "weight": 30 },
+    { "name": "vr_goggles", "weight": 30 },
+
+    { "name": "bttf", "weight": 20 },
+    { "name": "fire", "weight": 20 },
+    { "name": "tyler_durden", "weight": 20 },
+
+    { "name": "kano", "weight": 10 },
+    { "name": "laser", "weight": 10 }
+  ],
+  "mouth": [
+    { "name": "none", "weight": 0 },
+
+    { "name": "beard", "weight": 40 },
+    { "name": "bubblegum", "weight": 40 },
+    { "name": "closed", "weight": 40 },
+    { "name": "fury", "weight": 40 },
+    { "name": "joint", "weight": 40 },
+    { "name": "sad", "weight": 40 },
+
+    { "name": "rose", "weight": 30 },
+    { "name": "diamond_grill", "weight": 30 },
+    { "name": "pipe", "weight": 30 },
+    { "name": "rainbow_grill", "weight": 30 },
+
+    { "name": "cyber_punk", "weight": 20 },
+    { "name": "hannibal", "weight": 20 },
+    { "name": "white_beard", "weight": 20 },
+
+    { "name": "fire", "weight": 10 },
+    { "name": "gold_grill", "weight": 10 }
+  ],
+  "head": [
+    { "name": "none", "weight": 750 },
+
+    { "name": "arrow", "weight": 20 },
+    { "name": "bandana", "weight": 20 },
+    { "name": "beanie", "weight": 20 },
+    { "name": "birthday", "weight": 20 },
+    { "name": "cowboy", "weight": 20 },
+    { "name": "festive", "weight": 20 },
+    { "name": "fox_mask", "weight": 20 },
+    { "name": "headphones", "weight": 20 },
+    { "name": "japanese_bandana", "weight": 20 },
+    { "name": "pilot", "weight": 20 },
+    { "name": "prisoner", "weight": 20 },
+    { "name": "rasta", "weight": 20 },
+    { "name": "silver_earring", "weight": 20 },
+    { "name": "trucker_hat", "weight": 20 },
+
+    { "name": "arrow_head", "weight": 15 },
+    { "name": "bowler_hat", "weight": 15 },
+    { "name": "bunny_ears", "weight": 15 },
+    { "name": "devil_mask", "weight": 15 },
+    { "name": "dracuto", "weight": 15 },
+    { "name": "flowers", "weight": 15 },
+    { "name": "frog_mask", "weight": 15 },
+    { "name": "gold_earring", "weight": 15 },
+    { "name": "peaky", "weight": 15 },
+    { "name": "pirate", "weight": 15 },
+
+    { "name": "devil_horns", "weight": 10 },
+    { "name": "metaheads", "weight": 10 },
+    { "name": "mohawk", "weight": 10 },
+    { "name": "raiden", "weight": 10 },
+    { "name": "trump", "weight": 10 },
+    { "name": "unicorn", "weight": 10 },
+
+    { "name": "crown", "weight": 5 },
+    { "name": "halo", "weight": 5 },
+    { "name": "samurai_helmet", "weight": 5 }
+  ],
+  "clothing": [
+    { "name": "none", "weight": 200 },
+
+    { "name": "aqua_hoodie", "weight": 40 },
+    { "name": "bomber_jacket", "weight": 40 },
+    { "name": "bulletproof_vest", "weight": 40 },
+    { "name": "cowboy", "weight": 40 },
+    { "name": "cyber_punk", "weight": 40 },
+    { "name": "doc", "weight": 40 },
+    { "name": "gigilo", "weight": 40 },
+    { "name": "green_hoodie", "weight": 40 },
+    { "name": "green_shirt", "weight": 40 },
+    { "name": "leather_jacket", "weight": 40 },
+    { "name": "neo", "weight": 40 },
+    { "name": "ninja", "weight": 40 },
+    { "name": "overalls", "weight": 40 },
+    { "name": "purple_hoodie", "weight": 40 },
+    { "name": "red_t", "weight": 40 },
+    { "name": "silver_chain", "weight": 40 },
+    { "name": "skeleton_jacket", "weight": 40 },
+    { "name": "spartan", "weight": 40 },
+    { "name": "squid", "weight": 40 },
+    { "name": "stock_broker", "weight": 40 },
+
+    { "name": "ace", "weight": 30 },
+    { "name": "astro", "weight": 30 },
+    { "name": "beetle", "weight": 30 },
+    { "name": "burned_t", "weight": 30 },
+    { "name": "dress", "weight": 30 },
+    { "name": "dumb", "weight": 30 },
+    { "name": "dumber", "weight": 30 },
+    { "name": "freddy", "weight": 30 },
+    { "name": "fur_coat", "weight": 30 },
+    { "name": "gold_hoodie", "weight": 30 },
+    { "name": "hans", "weight": 30 },
+    { "name": "insane", "weight": 30 },
+    { "name": "lumbergh", "weight": 30 },
+    { "name": "rambo", "weight": 30 },
+    { "name": "red", "weight": 30 },
+    { "name": "robin_hood", "weight": 30 },
+    { "name": "wizerd", "weight": 30 },
+
+    { "name": "barbie", "weight": 15 },
+    { "name": "bateman", "weight": 15 },
+    { "name": "castle", "weight": 15 },
+    { "name": "draku", "weight": 15 },
+    { "name": "godfather", "weight": 15 },
+    { "name": "gold_chain", "weight": 15 },
+    { "name": "homelander", "weight": 15 },
+    { "name": "joker", "weight": 15 },
+    { "name": "kill", "weight": 15 },
+    { "name": "panther", "weight": 15 },
+    { "name": "pink_hoodie", "weight": 15 },
+    { "name": "powers", "weight": 15 },
+    { "name": "ranger", "weight": 15 },
+    { "name": "superhero", "weight": 15 },
+    { "name": "toga", "weight": 15 },
+    { "name": "tyler_durden", "weight": 15 },
+
+    { "name": "john_mcclane", "weight": 5 },
+    { "name": "samurai_armor", "weight": 5 },
+    { "name": "shang_tsung", "weight": 5 },
+    { "name": "snake", "weight": 5 },
+    { "name": "venom", "weight": 5 },
+    { "name": "mystique", "weight": 5 }
+  ],
+  "back": [
+    { "name": "none", "weight": 1000 },
+
+    { "name": "medieval_sword", "weight": 15 },
+    { "name": "rpg", "weight": 15 },
+    { "name": "shield", "weight": 15 },
+    { "name": "wings", "weight": 15 },
+
+    { "name": "angel", "weight": 10 },
+    { "name": "devil", "weight": 10 },
+    { "name": "katanas", "weight": 10 },
+
+    { "name": "fire_wings", "weight": 7 },
+    { "name": "robot_arms", "weight": 7 },
+
+    { "name": "gold_wings", "weight": 3 }
+  ]
+}

@@ -59,12 +59,12 @@
 
 .board {
   border: 2px solid red;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   position: fixed;
   left: 0;
   z-index: 9999;
-  display: none;
+  //display: none;
 }
 
 .reload {

@@ -28,7 +28,7 @@ function Home() {
 
   const [freeMintCount, setFreeMintCount] = useState(0)
 
-  const auth =useUpProvider()
+  const auth = useUpProvider()
 
   const web3Readonly = new Web3(import.meta.env.VITE_LUKSO_PROVIDER)
   const _ = web3Readonly.utils
@@ -44,7 +44,7 @@ function Home() {
   const backGroupRef = useRef()
   const GATEWAY = `https://ipfs.io/ipfs/`
   const CID = `bafybeihqjtxnlkqwykthnj7idx6ytivmyttjcm4ckuljlkkauh6nm3lzve`
-  const BASE_URL =`./dracos-nfts/` //`https://aratta.dev/dracos-nfts/` //`${GATEWAY}${CID}/` // `http://localhost/luxgenerator/src/assets/pepito-pfp/` //`http://localhost/luxgenerator/src/assets/pepito-pfp/` //`${GATEWAY}${CID}/` // Or
+  const BASE_URL = `./dracos-nfts/` //`https://aratta.dev/dracos-nfts/` //`${GATEWAY}${CID}/` // `http://localhost/luxgenerator/src/assets/pepito-pfp/` //`http://localhost/luxgenerator/src/assets/pepito-pfp/` //`${GATEWAY}${CID}/` // Or
 
   const weightedRandom = (items) => {
     //console.log(items)
@@ -65,7 +65,7 @@ function Home() {
     // const htmlStr = SVG.current.outerHTML
     // const blob = new Blob([htmlStr], { type: 'image/svg+xml' })
     // const url = URL.createObjectURL(blob)
-const a = document.createElement('a')
+    const a = document.createElement('a')
     // a.setAttribute('download', `dracos-pfp-${name}.svg`)
 
     a.setAttribute('href', url)
@@ -73,7 +73,7 @@ const a = document.createElement('a')
     document.body.appendChild(a)
     a.click()
     a.remove()
-   // URL.revokeObjectURL(url)
+    // URL.revokeObjectURL(url)
   }
 
   const generate = async (trait) => {
@@ -83,59 +83,60 @@ const a = document.createElement('a')
     // SVG.current.innerHTML = ''
     const randomTrait = weightedRandom(Metadata[`${trait}`])
     console.log(`${BASE_URL}${trait}/${randomTrait}.png`)
-    await fetch(`${BASE_URL}${trait}/${randomTrait}.png`, {mode: 'no-cors'})
-      .then((response) => response.blob())
-      .then((blob) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(blob)
-        reader.onloadend = () => {
-          const base64data = reader.result
-          const image = document.createElementNS(svgns, 'image')
-          image.setAttribute('href', base64data)
-          image.setAttribute('width', 400)
-          image.setAttribute('height', 400)
-          image.setAttribute('x', 0)
-          image.setAttribute('y', 0)
-          image.addEventListener('load', () => console.log(`${trait} has been loaded`))
+    let response = await fetch(`${BASE_URL}${trait}/${randomTrait}.png`, { mode: 'no-cors' })
+    let blob = await response.blob()
 
-          // Add to the group
-          switch (trait) {
-            case `base`:
-              baseGroupRef.current.innerHTML = ''
-              baseGroupRef.current.appendChild(image)
-              break
-            case `background`:
-              backgroundGroupRef.current.innerHTML = ''
-              backgroundGroupRef.current.appendChild(image)
-              break
-            case `eyes`:
-              eyesGroupRef.current.innerHTML = ''
-              eyesGroupRef.current.appendChild(image)
-              break
-            case `mouth`:
-              mouthGroupRef.current.innerHTML = ''
-              mouthGroupRef.current.appendChild(image)
-              break
-            case `head`:
-              headGroupRef.current.innerHTML = ''
-              headGroupRef.current.appendChild(image)
-              break
-            case `clothing`:
-              clothingGroupRef.current.innerHTML = ''
-              clothingGroupRef.current.appendChild(image)
-              break
-            case `back`:
-              backGroupRef.current.innerHTML = ''
-              backGroupRef.current.appendChild(image)
-              break
-            default:
-              break
-          }
-        }
-      })
+    const reader = new FileReader()
+    reader.readAsDataURL(blob)
+    reader.onloadend = () => {
+      const base64data = reader.result
+      const image = document.createElementNS(svgns, 'image')
+      image.setAttribute('href', base64data)
+      image.setAttribute('width', 400)
+      image.setAttribute('height', 400)
+      image.setAttribute('x', 0)
+      image.setAttribute('y', 0)
+      image.addEventListener('load', () => console.log(`${trait} has been loaded`))
 
-    return randomTrait
+      // Add to the group
+      switch (trait) {
+        case `base`:
+          baseGroupRef.current.innerHTML = ''
+          baseGroupRef.current.appendChild(image)
+          break
+        case `background`:
+          backgroundGroupRef.current.innerHTML = ''
+          backgroundGroupRef.current.appendChild(image)
+          break
+        case `eyes`:
+          eyesGroupRef.current.innerHTML = ''
+          eyesGroupRef.current.appendChild(image)
+          break
+        case `mouth`:
+          mouthGroupRef.current.innerHTML = ''
+          mouthGroupRef.current.appendChild(image)
+          break
+        case `head`:
+          headGroupRef.current.innerHTML = ''
+          headGroupRef.current.appendChild(image)
+          break
+        case `clothing`:
+          clothingGroupRef.current.innerHTML = ''
+          clothingGroupRef.current.appendChild(image)
+          break
+        case `back`:
+          backGroupRef.current.innerHTML = ''
+          backGroupRef.current.appendChild(image)
+          break
+        default:
+          break
+      }
+    }
+    await sleep (1000)
+   return randomTrait
   }
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   const generateMetadata = async (base, background, eyes, mouth, head, clothing, back) => {
     const uploadResult = await upload()
@@ -161,11 +162,11 @@ const a = document.createElement('a')
   }
 
   const rAsset = async (cid) => {
-    const assetBuffer = await fetch(`${cid}`,  {
+    const assetBuffer = await fetch(`${cid}`, {
       mode: 'cors',
       headers: {
-        'Access-Control-Allow-Origin':'*'
-      }
+        'Access-Control-Allow-Origin': '*',
+      },
     }).then(async (response) => {
       return response.arrayBuffer().then((buffer) => new Uint8Array(buffer))
     })
