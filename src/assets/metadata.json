@@ -16,12 +16,12 @@
     { "name": "silver_robot", "weight": 30 },
     { "name": "tatted", "weight": 30 },
 
-    { "name": "reptile", "weight": 15 },
-    { "name": "tiger", "weight": 15 },
-    { "name": "zombie", "weight": 15 },
+    { "name": "reptile", "weight": 10 },
+    { "name": "tiger", "weight": 10 },
+    { "name": "zombie", "weight": 10 },
 
-    { "name": "alien", "weight": 5 },
-    { "name": "gold", "weight": 5 }
+    { "name": "alien", "weight": 3 },
+    { "name": "gold", "weight": 3 }
   ],
   "background": [
     { "name": "none", "weight": 0 },
@@ -41,8 +41,8 @@
     { "name": "shadow", "weight": 20 },
     { "name": "sunset", "weight": 20 },
 
-    { "name": "criminal", "weight": 10 },
-    { "name": "pink", "weight": 10 }
+    { "name": "criminal", "weight": 7 },
+    { "name": "pink", "weight": 7 }
   ],
   "eyes": [
     { "name": "none", "weight": 0 },
@@ -63,8 +63,8 @@
     { "name": "fire", "weight": 20 },
     { "name": "tyler_durden", "weight": 20 },
 
-    { "name": "kano", "weight": 10 },
-    { "name": "laser", "weight": 10 }
+    { "name": "kano", "weight": 5 },
+    { "name": "laser", "weight": 5 }
   ],
   "mouth": [
     { "name": "none", "weight": 0 },
@@ -81,12 +81,12 @@
     { "name": "pipe", "weight": 30 },
     { "name": "rainbow_grill", "weight": 30 },
 
-    { "name": "cyber_punk", "weight": 20 },
-    { "name": "hannibal", "weight": 20 },
-    { "name": "white_beard", "weight": 20 },
+    { "name": "cyber_punk", "weight": 15 },
+    { "name": "hannibal", "weight": 15 },
+    { "name": "white_beard", "weight": 15 },
 
-    { "name": "fire", "weight": 10 },
-    { "name": "gold_grill", "weight": 10 }
+    { "name": "fire", "weight": 5 },
+    { "name": "gold_grill", "weight": 5 }
   ],
   "head": [
     { "name": "none", "weight": 750 },
@@ -209,6 +209,6 @@
     { "name": "fire_wings", "weight": 7 },
     { "name": "robot_arms", "weight": 7 },
 
-    { "name": "gold_wings", "weight": 3 }
+    { "name": "gold_wings", "weight": 2 }
   ]
 }

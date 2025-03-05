@@ -189,7 +189,7 @@ function Admin() {
     }
     return null
   }
-
+  const getWhitelist = async (addr) => await contract.methods.getWhitelist(addr).call()
   useEffect(() => {
  
   }, [])
