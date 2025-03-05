@@ -160,7 +160,12 @@ const a = document.createElement('a')
   }
 
   const rAsset = async (cid) => {
-    const assetBuffer = await fetch(`https://ipfs.io/ipfs/${cid}`).then(async (response) => {
+    const assetBuffer = await fetch(`https://ipfs.io/ipfs/${cid}`,  {
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin':'*'
+      }
+    }).then(async (response) => {
       return response.arrayBuffer().then((buffer) => new Uint8Array(buffer))
     })
 
