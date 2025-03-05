@@ -28,7 +28,7 @@ function Home() {
 
   const [freeMintCount, setFreeMintCount] = useState(0)
 
-  const auth = useUpProvider()
+  const auth =useUpProvider()
 
   const web3Readonly = new Web3(import.meta.env.VITE_LUKSO_PROVIDER)
   const _ = web3Readonly.utils
@@ -44,7 +44,7 @@ function Home() {
   const backGroupRef = useRef()
   const GATEWAY = `https://ipfs.io/ipfs/`
   const CID = `bafybeihqjtxnlkqwykthnj7idx6ytivmyttjcm4ckuljlkkauh6nm3lzve`
-  const BASE_URL = `${GATEWAY}${CID}/` // `http://localhost/luxgenerator/src/assets/pepito-pfp/` //`http://localhost/luxgenerator/src/assets/pepito-pfp/` //`${GATEWAY}${CID}/` // Or
+  const BASE_URL = `https://aratta.dev/dracos-nfts/` //`${GATEWAY}${CID}/` // `http://localhost/luxgenerator/src/assets/pepito-pfp/` //`http://localhost/luxgenerator/src/assets/pepito-pfp/` //`${GATEWAY}${CID}/` // Or
 
   const weightedRandom = (items) => {
     //console.log(items)
@@ -82,7 +82,7 @@ const a = document.createElement('a')
     // Clear the board
     // SVG.current.innerHTML = ''
     const randomTrait = weightedRandom(Metadata[`${trait}`])
-    await fetch(`${BASE_URL}${trait}/${randomTrait}.png`)
+    await fetch(`${BASE_URL}${trait}/${randomTrait}.png`, {mode: 'no-cors'})
       .then((response) => response.blob())
       .then((blob) => {
         const reader = new FileReader()
@@ -137,12 +137,12 @@ const a = document.createElement('a')
   }
 
   const generateMetadata = async (base, background, eyes, mouth, head, clothing, back) => {
-    const uploadedCID = await upload()
-    const verifiableUrl = await rAsset(uploadedCID)
-    console.log(uploadedCID)
+    const uploadResult = await upload()
+    console.log(`uploadResult => `, uploadResult)
+    const verifiableUrl = await rAsset(uploadResult[1])
     console.log(`verifiableUrl:`, verifiableUrl)
     console.log(_.keccak256(verifiableUrl))
-    return [uploadedCID, verifiableUrl]
+    return [uploadResult[0], verifiableUrl]
   }
 
   const generateOne = async () => {
@@ -160,7 +160,7 @@ const a = document.createElement('a')
   }
 
   const rAsset = async (cid) => {
-    const assetBuffer = await fetch(`https://${cid}.ipfs.dweb.link/`,  {
+    const assetBuffer = await fetch(`${cid}`,  {
       mode: 'cors',
       headers: {
         'Access-Control-Allow-Origin':'*'
@@ -183,7 +183,7 @@ const a = document.createElement('a')
       const upload = await pinata.upload.file(file)
       console.log(upload)
       toast.dismiss(t)
-      return upload.IpfsHash
+      return [upload.IpfsHash, url]
     } catch (error) {
       console.log(error)
     }
