@@ -62,17 +62,19 @@ function Home() {
   }
 
   const download = (url) => {
-    // const htmlStr = SVG.current.outerHTML
+    //const htmlStr = SVG.current.outerHTML
     // const blob = new Blob([htmlStr], { type: 'image/svg+xml' })
     // const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    // a.setAttribute('download', `dracos-pfp-${name}.svg`)
+    window.open(url, '_blank')
+    //  return
+    //   const a = document.createElement('a')
+    // a.setAttribute('download')
 
-    a.setAttribute('href', url)
-    a.style.display = 'none'
-    document.body.appendChild(a)
-    a.click()
-    a.remove()
+    //   a.setAttribute('href', url)
+    //   a.style.display = 'none'
+    //   document.body.appendChild(a)
+    //   a.click()
+    //   a.remove()
     // URL.revokeObjectURL(url)
   }
 
@@ -519,13 +521,18 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     <>
       <div className={`${styles.page} __container`} data-width={`medium`}>
         <Toaster />
-        <button className={`${styles.reload} ms-depth-4`} onClick={() => window.location.reload()}>
-          🔄️
-        </button>
 
         {tokenDetailModal && tokenDetail && (
           <div className={`${styles.tokenDetail}`}>
-            <Back />
+            <button
+              className={`${styles.back} ms-depth-4`}
+              onClick={() => {
+                setSwipeModal(true)
+                setTokenDetailModal(false)
+              }}
+            >
+              ⬅️
+            </button>
             <header>
               {profile && profile.data.search_profiles.length > 0 && (
                 <ul className={`d-flex flex-row align-items-center justify-content-between w-100`}>
@@ -586,39 +593,76 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                 </svg>
               </a>
 
-              {/* <a title="Download" href={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`}>
-                <svg width="39" height="38" viewBox="0 0 39 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <button title="Download" onClick={(e) => download(`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`)}>
+                <svg width="39" height="26" viewBox="0 0 39 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
-                    d="M10.1865 28.5H29.1865V25.5H10.1865V28.5ZM19.6865 22.3075L26.994 15L24.8865 12.8925L21.1865 16.531V7.5H18.1865V16.531L14.4865 12.8925L12.379 15L19.6865 22.3075ZM19.69 38C17.062 38 14.5919 37.5013 12.2795 36.504C9.96719 35.5067 7.95586 34.1532 6.24552 32.4435C4.53519 30.7338 3.18102 28.7233 2.18302 26.412C1.18536 24.1007 0.686523 21.6312 0.686523 19.0035C0.686523 16.3755 1.18519 13.9053 2.18252 11.593C3.17986 9.28067 4.53336 7.26933 6.24302 5.559C7.95269 3.84867 9.96319 2.4945 12.2745 1.4965C14.5859 0.498833 17.0554 0 19.683 0C22.311 0 24.7812 0.498666 27.0935 1.496C29.4059 2.49333 31.4172 3.84683 33.1275 5.5565C34.8379 7.26617 36.192 9.27667 37.19 11.588C38.1877 13.8993 38.6865 16.3688 38.6865 18.9965C38.6865 21.6245 38.1879 24.0947 37.1905 26.407C36.1932 28.7193 34.8397 30.7307 33.13 32.441C31.4204 34.1513 29.4099 35.5055 27.0985 36.5035C24.7872 37.5012 22.3177 38 19.69 38Z"
+                    d="M19.6906 20.2804C21.7486 20.2804 23.4966 19.5722 24.9344 18.1558C26.3722 16.7394 27.0911 15.0195 27.0911 12.996C27.0911 10.9725 26.3708 9.25387 24.9303 7.84018C23.4898 6.42649 21.7405 5.71964 19.6824 5.71964C17.6244 5.71964 15.8765 6.42783 14.4387 7.8442C13.0009 9.26057 12.2819 10.9805 12.2819 13.004C12.2819 15.0275 13.0022 16.7461 14.4427 18.1598C15.8833 19.5735 17.6326 20.2804 19.6906 20.2804ZM19.6865 17.8214C18.3244 17.8214 17.1666 17.3527 16.2131 16.4152C15.2596 15.4777 14.7828 14.3393 14.7828 13C14.7828 11.6607 15.2596 10.5223 16.2131 9.58482C17.1666 8.64732 18.3244 8.17857 19.6865 8.17857C21.0487 8.17857 22.2065 8.64732 23.16 9.58482C24.1135 10.5223 24.5902 11.6607 24.5902 13C24.5902 14.3393 24.1135 15.4777 23.16 16.4152C22.2065 17.3527 21.0487 17.8214 19.6865 17.8214ZM19.6888 25.5C15.5125 25.5 11.7071 24.3673 8.27272 22.1018C4.83832 19.8366 2.30959 16.8027 0.686523 13C2.30959 9.19732 4.83741 6.16339 8.27 3.89821C11.7029 1.63274 15.5076 0.5 19.6843 0.5C23.8606 0.5 27.6659 1.63274 31.1003 3.89821C34.5347 6.16339 37.0635 9.19732 38.6865 13C37.0635 16.8027 34.5356 19.8366 31.1031 22.1018C27.6702 24.3673 23.8654 25.5 19.6888 25.5Z"
                     fill="#3A8BF0"
                   />
                 </svg>
-              </a> */}
+              </button>
             </footer>
           </div>
         )}
 
         {swipeModal && token && (
           <>
-            <Back />
+            <a href={`../`} className={`${styles.back} ms-depth-4`}>
+              ⬅️
+            </a>
             <main className={`${styles.main} d-f-c`}>
-              <div className={`w-100 h-100 grid grid--fill grid--gap-1`} style={{ '--data-width': `180px` }}>
-                {token.sort((a,b) => _.toNumber(a.tokenId) - _.toNumber(b.tokenId) ).map((item, i) => {
-                  return (
-                    <div key={i} className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`} onClick={(e) => handleTokenDetail(item.tokenId)}>
-                      <embed type="image/svg+xml" src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
-                      <div className={`${styles.token__body} w-100`}>
-                        <ul style={{ background: `var(--black)`, color: `#fff` }}>
-                          <li>
-                            <h3>#{_.toNumber(item.tokenId)}</h3>
-                          </li>
-                          <li>Trait count: {item.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</li>
-                          <li>Base: {item.LSP4Metadata.attributes[0].value}</li>
-                        </ul>
+              <header className={`${styles.header} d-f-c`}>
+                <figure className={`d-f-c flex-column`}>
+                  <img alt={import.meta.env.VITE_NAME} src={`/logo.svg`} className={`rounded`} />
+                  <figcaption className={`mt-10`}>
+                    <svg width="69" height="28" viewBox="0 0 69 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.488563 2.3253C0.562773 1.06373 0.303038 0.878205 1.63881 0.69268C3.56827 0.432947 5.01536 1.50899 6.49956 3.03029C17.3713 14.1247 4.01353 30.2653 0.970927 27.1856C-0.327745 25.8869 0.191724 8.07656 0.488563 2.3253ZM5.34931 4.92264C4.90405 4.29186 3.23433 2.13977 2.82617 3.92081C1.93565 8.03945 2.49223 19.4307 2.64065 24.1801C8.57743 23.4751 10.7295 12.492 5.34931 4.92264Z"
+                        fill="black"
+                      />
+                      <path
+                        d="M16.187 3.47555C13.8494 2.77055 14.1834 2.99319 14.1463 5.03396C14.1091 8.00235 14.1091 10.9707 14.1463 13.902C14.2205 14.6441 14.4431 16.3138 15.3707 16.5365C18.0794 17.1673 24.1275 5.77605 16.187 3.47555ZM12.1055 1.36057C13.367 -3.20333 30.7321 7.03762 17.3002 17.9094C20.4541 19.8759 21.6043 22.028 22.0125 25.3674C22.198 27.0001 21.493 27.9648 20.3428 26.7403C19.378 25.7014 20.8622 22.5846 17.0404 20.0985C16.521 19.7646 14.9255 18.7999 14.2947 19.2822C13.0331 20.3212 15.4449 26.8516 13.367 27.0743C11.8086 27.2227 12.2539 24.8851 12.1797 23.6606C11.92 16.9817 11.8457 2.3624 12.1055 1.36057Z"
+                        fill="black"
+                      />
+                      <path
+                        d="M30.2891 17.427C31.3651 17.0931 29.0646 4.5887 27.9886 4.5887C26.8754 4.5887 25.1315 14.6812 25.651 17.0188C26.5044 18.1691 29.1017 17.5754 30.2891 17.427ZM26.0962 3.36423C31.0312 -8.88039 35.0756 28.7069 31.6249 27.0743C31.0312 26.7774 31.2538 22.2877 30.252 19.9501C25.9107 19.2822 25.2428 19.3193 24.9089 23.1783C24.3894 29.115 23.2021 28.0019 23.2392 22.1022C23.2392 16.4994 23.9813 8.55892 26.0962 3.36423Z"
+                        fill="black"
+                      />
+                      <path
+                        d="M34.0262 10.3029C34.6198 7.55709 39.295 -0.977039 42.82 0.952416C45.1205 2.21398 33.2098 4.51449 35.8814 17.0188C37.4027 24.0688 40 23.0669 42.7829 25.4045C45.1205 27.3711 38.9982 28.5585 35.4732 21.3972C33.7293 17.8351 33.1727 14.1618 34.0262 10.3029Z"
+                        fill="black"
+                      />
+                      <path
+                        d="M52.4469 12.0468C51.2966 4.14344 47.549 -1.94177 44.7291 8.70734C40.5733 24.4027 53.7456 33.9758 52.4469 12.0468ZM42.1317 11.8613C44.3951 -3.16623 51.4822 -1.49651 53.8198 9.30102C57.7529 27.8164 40.7217 36.3876 42.1317 11.8613Z"
+                        fill="black"
+                      />
+                      <path
+                        d="M56.4596 3.69818C57.7583 1.76872 59.5764 0.321632 62.0254 0.618472C65.3648 1.02662 68.1848 4.55159 68.5558 6.55526C68.8156 7.92814 67.1458 9.00418 66.5522 6.92631C64.7711 0.8411 59.2054 2.17688 57.5357 5.62763C55.5691 9.74628 58.7972 11.416 61.7656 12.7518C66.0327 14.6812 71.6726 17.5754 67.2571 24.143C65.9585 26.0724 64.1403 27.5195 61.6914 27.2227C58.3891 26.8145 55.6433 23.4009 55.1609 21.3972C54.8641 20.0243 56.4596 18.503 57.2017 21.1375C60.2814 31.7124 73.2681 18.7257 62.5448 15.0523C56.9049 14.0504 52.7862 9.1526 56.4596 3.69818Z"
+                        fill="black"
+                      />
+                    </svg>
+                  </figcaption>
+                </figure>
+              </header>
+              <div className={`w-100 h-100 grid grid--fill grid--gap-1 mt-20`} style={{ '--data-width': `180px` }}>
+                {token
+                  .sort((a, b) => _.toNumber(a.tokenId) - _.toNumber(b.tokenId))
+                  .map((item, i) => {
+                    return (
+                      <div key={i} className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`} onClick={(e) => handleTokenDetail(item.tokenId)}>
+                        <embed type="image/svg+xml" src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                        <div className={`${styles.token__body} w-100`}>
+                          <ul style={{ background: `var(--black)`, color: `#fff` }}>
+                            <li>
+                              <h3>#{_.toNumber(item.tokenId)}</h3>
+                            </li>
+                            <li>Trait count: {item.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</li>
+                            <li>Base: {item.LSP4Metadata.attributes[0].value}</li>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                  )
-                })}
+                    )
+                  })}
               </div>
             </main>
           </>
@@ -739,11 +783,11 @@ const Whitelist = ({ setFreeMintCount }) => {
   } else return <>Loading data...</>
 }
 
-const Back = () => {
+const Reload = () => {
   return (
-    <a href={`../`} className={`${styles.back} ms-depth-4`}>
-      ⬅️
-    </a>
+    <button className={`${styles.reload} ms-depth-4`} onClick={() => window.location.reload()}>
+      🔄️
+    </button>
   )
 }
 
