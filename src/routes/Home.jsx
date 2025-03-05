@@ -61,18 +61,19 @@ function Home() {
     }
   }
 
-  const download = () => {
-    const htmlStr = SVG.current.outerHTML
-    const blob = new Blob([htmlStr], { type: 'image/svg+xml' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.setAttribute('download', 'result.svg')
+  const download = (url) => {
+    // const htmlStr = SVG.current.outerHTML
+    // const blob = new Blob([htmlStr], { type: 'image/svg+xml' })
+    // const url = URL.createObjectURL(blob)
+const a = document.createElement('a')
+    // a.setAttribute('download', `dracos-pfp-${name}.svg`)
+
     a.setAttribute('href', url)
     a.style.display = 'none'
     document.body.appendChild(a)
     a.click()
     a.remove()
-    URL.revokeObjectURL(url)
+   // URL.revokeObjectURL(url)
   }
 
   const generate = async (trait) => {
@@ -275,7 +276,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
               console.log(res)
               setTotalSupply(_.toNumber(res))
             })
-        
+
             getMaxSupply().then((res) => {
               console.log(res)
               setMaxSupply(_.toNumber(res))
@@ -372,7 +373,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
             toast.dismiss(t)
 
             handleTokenDetail(tokenId)
-          //  showSwipe()
+            //  showSwipe()
           })
           .catch((error) => {
             console.log(error)
@@ -549,7 +550,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                     <li>
                       <h3># {tokenDetail.tokenId.slice(-4)}</h3>
                     </li>
-                    <li>Trait count: {tokenDetail.LSP4Metadata.attributes.filter(item=> item.value !== `NONE`).length}</li>
+                    <li>Trait count: {tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</li>
                     <li>Base: {tokenDetail.LSP4Metadata.attributes[0].value}</li>
                   </ul>
                 </div>
@@ -564,6 +565,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                   />
                 </svg>
               </button>
+
               <a href={`../`}>
                 <svg width="39" height="35" viewBox="0 0 39 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -572,6 +574,15 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                   />
                 </svg>
               </a>
+
+              {/* <a title="Download" href={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`}>
+                <svg width="39" height="38" viewBox="0 0 39 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10.1865 28.5H29.1865V25.5H10.1865V28.5ZM19.6865 22.3075L26.994 15L24.8865 12.8925L21.1865 16.531V7.5H18.1865V16.531L14.4865 12.8925L12.379 15L19.6865 22.3075ZM19.69 38C17.062 38 14.5919 37.5013 12.2795 36.504C9.96719 35.5067 7.95586 34.1532 6.24552 32.4435C4.53519 30.7338 3.18102 28.7233 2.18302 26.412C1.18536 24.1007 0.686523 21.6312 0.686523 19.0035C0.686523 16.3755 1.18519 13.9053 2.18252 11.593C3.17986 9.28067 4.53336 7.26933 6.24302 5.559C7.95269 3.84867 9.96319 2.4945 12.2745 1.4965C14.5859 0.498833 17.0554 0 19.683 0C22.311 0 24.7812 0.498666 27.0935 1.496C29.4059 2.49333 31.4172 3.84683 33.1275 5.5565C34.8379 7.26617 36.192 9.27667 37.19 11.588C38.1877 13.8993 38.6865 16.3688 38.6865 18.9965C38.6865 21.6245 38.1879 24.0947 37.1905 26.407C36.1932 28.7193 34.8397 30.7307 33.13 32.441C31.4204 34.1513 29.4099 35.5055 27.0985 36.5035C24.7872 37.5012 22.3177 38 19.69 38Z"
+                    fill="#3A8BF0"
+                  />
+                </svg>
+              </a> */}
             </footer>
           </div>
         )}
@@ -590,7 +601,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                           <li>
                             <h3># {item.tokenId.slice(-4)}</h3>
                           </li>
-                          <li>Trait count: {item.LSP4Metadata.attributes.filter(item=> item.value !== `NONE`).length}</li>
+                          <li>Trait count: {item.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</li>
                           <li>Base: {item.LSP4Metadata.attributes[0].value}</li>
                         </ul>
                       </div>

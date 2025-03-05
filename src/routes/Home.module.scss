@@ -208,13 +208,20 @@
     }
 
     button {
-      background: rgba(255, 203, 87, 0.15);
-      box-shadow: 0px 3.75904px 5.92048px rgba(0, 0, 0, 0.1);
+      &:first-child {
+        background: rgba(255, 203, 87, 0.15);
+        box-shadow: 0px 3.75904px 5.92048px rgba(0, 0, 0, 0.1);
+      }
     }
 
     a {
       background: rgba(254, 105, 180, 0.15);
       box-shadow: 0px 3.75904px 5.92048px rgba(0, 0, 0, 0.1);
+
+      &:last-child {
+        background: #E9F8FF;
+        box-shadow: 0px 3.75904px 5.92048px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }
