@@ -44,7 +44,7 @@ function Home() {
   const backGroupRef = useRef()
   const GATEWAY = `https://ipfs.io/ipfs/`
   const CID = `bafybeihqjtxnlkqwykthnj7idx6ytivmyttjcm4ckuljlkkauh6nm3lzve`
-  const BASE_URL = `https://aratta.dev/dracos-nfts/` //`${GATEWAY}${CID}/` // `http://localhost/luxgenerator/src/assets/pepito-pfp/` //`http://localhost/luxgenerator/src/assets/pepito-pfp/` //`${GATEWAY}${CID}/` // Or
+  const BASE_URL =`./dracos-nfts/` //`https://aratta.dev/dracos-nfts/` //`${GATEWAY}${CID}/` // `http://localhost/luxgenerator/src/assets/pepito-pfp/` //`http://localhost/luxgenerator/src/assets/pepito-pfp/` //`${GATEWAY}${CID}/` // Or
 
   const weightedRandom = (items) => {
     //console.log(items)
@@ -82,6 +82,7 @@ const a = document.createElement('a')
     // Clear the board
     // SVG.current.innerHTML = ''
     const randomTrait = weightedRandom(Metadata[`${trait}`])
+    console.log(`${BASE_URL}${trait}/${randomTrait}.png`)
     await fetch(`${BASE_URL}${trait}/${randomTrait}.png`, {mode: 'no-cors'})
       .then((response) => response.blob())
       .then((blob) => {
