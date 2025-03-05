@@ -1,8 +1,8 @@
 {
-	"id": "86b9f747ed839c6b405d886c4bc1405a",
+	"id": "039cb40bdc7de27e15fe9878460d9ea4",
 	"_format": "hh-sol-build-info-1",
-	"solcVersion": "0.8.26",
-	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"solcVersion": "0.8.28",
+	"solcLongVersion": "0.8.28+commit.7893614a",
 	"input": {
 		"language": "Solidity",
 		"sources": {
@@ -12,7 +12,7 @@
 		},
 		"settings": {
 			"optimizer": {
-				"enabled": false,
+				"enabled": true,
 				"runs": 200
 			},
 			"outputSelection": {

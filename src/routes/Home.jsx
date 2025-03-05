@@ -23,6 +23,8 @@ function Home() {
   const [tokenDetailModal, setTokenDetailModal] = useState(false)
   const [token, setToken] = useState([])
   const [profile, setProfile] = useState()
+  const [showWhitelist, setShowWhitelist] = useState(false)
+  const [whitelist,setWhitelist] = useState([])
   const [swipeCount, setSwipeCount] = useState(0)
   const [tokenDetail, setTokenDetail] = useState()
 
@@ -197,6 +199,7 @@ function Home() {
   const getMaxSupply = async () => await contractReadonly.methods.MAXSUPPLY().call()
   const getMintPrice = async () => await contractReadonly.methods.mintPrice().call()
   const getSwipePrice = async () => await contractReadonly.methods.swipePrice().call()
+  const getWhitelist = async (addr) => await contractReadonly.methods.getWhitelist(addr).call()
   const getSwipePool = async (tokenId, addr) => await contractReadonly.methods.swipePool(tokenId, addr).call()
 
   const mint = async (e) => {
@@ -430,6 +433,19 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     })
   }
 
+  const showWhitelistModal = async (e) =>{
+    
+    let addr = prompt("Please your profile address(0x0)", "");
+    if(addr ===null) return
+
+    const t = toast.loading(`Reading`)
+   getWhitelist(addr).then(count =>{
+    toast.success(`${count} free mint!`, {icon:`🐲`})
+    toast.dismiss(t)
+   })
+   // setWhitelist()
+  }
+
   const handleTokenDetail = async (tokenId) => {
     setSwipeModal(false)
     setTokenDetailModal(true)
@@ -650,7 +666,8 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                   .map((item, i) => {
                     return (
                       <div key={i} className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`} onClick={(e) => handleTokenDetail(item.tokenId)}>
-                        <embed type="image/svg+xml" src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                        <embed type="image/svg+xml" style={{ pointerEvents:` none`}}
+                         src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                         <div className={`${styles.token__body} w-100`}>
                           <ul style={{ background: `var(--black)`, color: `#fff` }}>
                             <li>
@@ -741,6 +758,9 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
               </button>
               <button onClick={(e) => showSwipe(e)} disabled={!auth.walletConnected}>
                 Swipe
+              </button>
+              <button onClick={(e) => showWhitelistModal(e)}>
+                Whitelist Checker
               </button>
             </footer>
           </>

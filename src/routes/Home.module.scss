@@ -146,6 +146,10 @@
       background-color: var(--color-primary);
       color: var(--white);
     }
+    &:nth-child(2) {
+      background-color: var(--warning);
+      color: var(--white);
+    }
     &:last-child {
       background-color: var(--gray);
       color: var(--white);
