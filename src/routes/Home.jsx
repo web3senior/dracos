@@ -47,7 +47,7 @@ function Home() {
   const BASE_URL = `${GATEWAY}${CID}/` // `http://localhost/luxgenerator/src/assets/pepito-pfp/` //`http://localhost/luxgenerator/src/assets/pepito-pfp/` //`${GATEWAY}${CID}/` // Or
 
   const weightedRandom = (items) => {
-    console.log(items)
+    //console.log(items)
     const totalWeight = items.reduce((acc, item) => acc + item.weight, 0)
     const randomNum = Math.random() * totalWeight
 
