@@ -132,11 +132,11 @@ function Home() {
           break
       }
     }
-    await sleep (1000)
-   return randomTrait
+    await sleep(1000)
+    return randomTrait
   }
 
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
   const generateMetadata = async (base, background, eyes, mouth, head, clothing, back) => {
     const uploadResult = await upload()
@@ -211,6 +211,15 @@ function Home() {
     const mouth = await generate(`mouth`)
     const head = await generate(`head`)
 
+    let attributes = []
+    if (base.toUpperCase() !== `NONE`) attributes.push({ key: 'Base', value: base.toUpperCase() })
+    if (background.toUpperCase() !== `NONE`) attributes.push({ key: 'Background', value: background.toUpperCase() })
+    if (eyes.toUpperCase() !== `NONE`) attributes.push({ key: 'Eyes', value: eyes.toUpperCase() })
+    if (mouth.toUpperCase() !== `NONE`) attributes.push({ key: 'Mouth', value: mouth.toUpperCase() })
+    if (head.toUpperCase() !== `NONE`) attributes.push({ key: 'Head', value: head.toUpperCase() })
+    if (clothing.toUpperCase() !== `NONE`) attributes.push({ key: 'Clothing', value: clothing.toUpperCase() })
+    if (back.toUpperCase() !== `NONE`) attributes.push({ key: 'Back', value: back.toUpperCase() })
+
     console.log(`Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`)
     generateMetadata(base, background, eyes, mouth, head, clothing, back).then((result) => {
       toast.dismiss(createToast)
@@ -228,15 +237,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
             { title: 'Mint', url: 'https://universaleverything.io/0x8A985fe01eA908F5697975332260553c454f8F77' },
             { title: '𝕏', url: 'https://x.com/DracosKodo' },
           ],
-          attributes: [
-            { key: 'Base', value: base.toUpperCase() },
-            { key: 'Background', value: background.toUpperCase() },
-            { key: 'Eyes', value: eyes.toUpperCase() },
-            { key: 'Mouth', value: mouth.toUpperCase() },
-            { key: 'Head', value: head.toUpperCase() },
-            { key: 'Clothing', value: clothing.toUpperCase() },
-            { key: 'Back', value: back.toUpperCase() },
-          ],
+          attributes: attributes,
           icon: [
             {
               width: 512,
@@ -316,6 +317,15 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     const mouth = await generate(`mouth`)
     const head = await generate(`head`)
 
+    let attributes = []
+    if (base.toUpperCase() !== `NONE`) attributes.push({ key: 'Base', value: base.toUpperCase() })
+    if (background.toUpperCase() !== `NONE`) attributes.push({ key: 'Background', value: background.toUpperCase() })
+    if (eyes.toUpperCase() !== `NONE`) attributes.push({ key: 'Eyes', value: eyes.toUpperCase() })
+    if (mouth.toUpperCase() !== `NONE`) attributes.push({ key: 'Mouth', value: mouth.toUpperCase() })
+    if (head.toUpperCase() !== `NONE`) attributes.push({ key: 'Head', value: head.toUpperCase() })
+    if (clothing.toUpperCase() !== `NONE`) attributes.push({ key: 'Clothing', value: clothing.toUpperCase() })
+    if (back.toUpperCase() !== `NONE`) attributes.push({ key: 'Back', value: back.toUpperCase() })
+
     console.log(`Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`)
     generateMetadata(base, background, eyes, mouth, head, clothing, back).then((result) => {
       const metadata = JSON.stringify({
@@ -330,15 +340,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
             { title: 'Mint', url: 'https://universaleverything.io/0x8A985fe01eA908F5697975332260553c454f8F77' },
             { title: '𝕏', url: 'https://x.com/DracosKodo' },
           ],
-          attributes: [
-            { key: 'Base', value: base.toUpperCase() },
-            { key: 'Background', value: background.toUpperCase() },
-            { key: 'Eyes', value: eyes.toUpperCase() },
-            { key: 'Mouth', value: mouth.toUpperCase() },
-            { key: 'Head', value: head.toUpperCase() },
-            { key: 'Clothing', value: clothing.toUpperCase() },
-            { key: 'Back', value: back.toUpperCase() },
-          ],
+          attributes: attributes,
           icon: [
             {
               width: 512,
