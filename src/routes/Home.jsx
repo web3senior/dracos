@@ -280,7 +280,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
             toast.success(`Done`)
             toast.dismiss(t)
 
-            window.location.reload()
+            showSwipe()
 
             getTotalSupply().then((res) => {
               console.log(res)
