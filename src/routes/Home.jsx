@@ -603,7 +603,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
             <Back />
             <main className={`${styles.main} d-f-c`}>
               <div className={`w-100 h-100 grid grid--fill grid--gap-1`} style={{ '--data-width': `180px` }}>
-                {token.sort((a,b) => _.toNumber(a.tokenId) < _.toNumber(b.tokenId) ).map((item, i) => {
+                {token.sort((a,b) => _.toNumber(a.tokenId) - _.toNumber(b.tokenId) ).map((item, i) => {
                   return (
                     <div key={i} className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`} onClick={(e) => handleTokenDetail(item.tokenId)}>
                       <embed type="image/svg+xml" src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
