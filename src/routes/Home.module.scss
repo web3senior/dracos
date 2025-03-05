@@ -64,7 +64,7 @@
   position: fixed;
   left: 0;
   z-index: 9999;
- // display: none;
+  display: none;
 }
 
 .reload {
@@ -219,7 +219,7 @@
       box-shadow: 0px 3.75904px 5.92048px rgba(0, 0, 0, 0.1);
 
       &:last-child {
-        background: #E9F8FF;
+        background: #e9f8ff;
         box-shadow: 0px 3.75904px 5.92048px rgba(0, 0, 0, 0.1);
       }
     }
