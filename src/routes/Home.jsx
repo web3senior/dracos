@@ -160,7 +160,7 @@ const a = document.createElement('a')
   }
 
   const rAsset = async (cid) => {
-    const assetBuffer = await fetch(`https://ipfs.io/ipfs/${cid}`,  {
+    const assetBuffer = await fetch(`https://${cid}.ipfs.dweb.link/`,  {
       mode: 'cors',
       headers: {
         'Access-Control-Allow-Origin':'*'
