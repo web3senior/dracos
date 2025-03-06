@@ -602,8 +602,8 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                     <li>
                       <h3>#{_.toNumber(tokenDetail.tokenId)}</h3>
                     </li>
-                    <li>Trait count: {tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</li>
-                    <li>Base: {tokenDetail.LSP4Metadata.attributes[0].value}</li>
+                    <li>Trait count: <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b></li>
+                    <li>Base: <b>{tokenDetail.LSP4Metadata.attributes[0].value}</b></li>
                   </ul>
                 </div>
               </div>
@@ -695,8 +695,8 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                             <li>
                               <h3>#{_.toNumber(item.tokenId)}</h3>
                             </li>
-                            <li>Trait count: {item.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</li>
-                            <li>Base: {item.LSP4Metadata.attributes[0].value}</li>
+                            <li>Trait count: <b>{item.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b></li>
+                            <li>Base: <b>{item.LSP4Metadata.attributes[0].value}</b></li>
                           </ul>
                         </div>
                       </div>
