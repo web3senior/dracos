@@ -595,7 +595,8 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
               <div className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`}>
                 {/* <embed type="image/svg+xml" src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                  */}
-                <img className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                <img  style={{height: `260px`}}
+                className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                 <div className={`${styles.token__body} w-100`}>
                   <ul style={{ background: `var(--black)`, color: `#fff` }}>
                     <li>
@@ -677,7 +678,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                   </figcaption>
                 </figure>
               </header>
-              <div className={`w-100 h-100 grid grid--fill grid--gap-1 mt-20`} style={{ '--data-width': `180px` }}>
+              <div className={`grid grid--fill grid--gap-1 mt-20 w-100`} style={{ '--data-width': `190px` }}>
                 {token
                   .sort((a, b) => _.toNumber(a.tokenId) - _.toNumber(b.tokenId))
                   .map((item, i) => {
@@ -753,14 +754,14 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                 <li className={`d-flex flex-column`}>
                   <h4>Mint price</h4>
                   <b className={`d-f-c grid--gap-025`}>
-                    <img alt={`⏣`} src={LYXbadge} />
+                    <img alt={`⏣`} src={LYXbadge} style={{width:`16px`}}/>
                     {mintPrice && mintPrice > 0 && <span>{_.fromWei(mintPrice, `ether`)}</span>}
                   </b>
                 </li>
                 <li className={`d-flex flex-column`}>
                   <h4>Swipe price</h4>
                   <b className={`d-f-c grid--gap-025`}>
-                    <img alt={`⏣`} src={LYXbadge} />
+                    <img alt={`⏣`} src={LYXbadge} style={{width:`16px`}} />
                     {swipePrice && swipePrice > 0 && <span>{_.fromWei(swipePrice, `ether`)}</span>}
                   </b>
                 </li>

@@ -20,17 +20,6 @@
   row-gap: 1.5rem;
 
   padding: 0 1rem;
-
-  object {
-  max-height: 100px;
-    max-width: 100px;
-    img {
-      object-fit: fill;
-      height: 10px;
-      max-width: 100px;
-      width: 100%;
-    }
-  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -101,8 +90,9 @@
 }
 
 .PFP {
+  display: block;
   width: 100%;
-  min-width: 260px;
+  height: 100%;
   display: block;
 }
 
@@ -111,12 +101,9 @@
   flex-direction: column;
   gap: 0.1rem;
   user-select: none;
-  width: 100%;
-  padding-bottom: 0.4rem;
 
-  img {
-    width: 16px;
-  }
+  padding-bottom: 0.4rem;
+  width: 100%;
 
   > ul {
     width: 50vw;
@@ -238,7 +225,8 @@ padding: 1rem;
     background-color: var(--black-050);
     border-radius: 999px;
     padding: 0.2rem;
-    margin: 0.4rem 0;
+    margin: 0.4rem auto;
+    max-width: 300px;
   }
 
   embed,object {
