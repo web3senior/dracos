@@ -422,8 +422,9 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
       console.log(item)
       getDataForTokenId(item).then((data) => {
         data = _.hexToUtf8(data)
-        data = data.slice(data.search(`data:application/json;`), data.length)
-
+        console.log(data)
+        data = data.search(`data:application/json;`) > -1 ? data.slice(data.search(`data:application/json;`), data.length) :  `${import.meta.env.VITE_IPFS_GATEWAY}`+ data.slice(data.search(`ipfs://`), data.length).replace(`ipfs://`,'')
+        console.log(data)
         fetchData(data).then((dataContent) => {
           console.log(dataContent)
           dataContent.tokenId = item
@@ -455,7 +456,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
 
     const t = toast.loading(`Reading`)
     getSwipePool(paddedHex).then((count) => {
-      toast.success(`${3 - _.toNumber(count)} swipes left!`, { icon: `${3 - _.toNumber(count) < 1 ? '😨':'🔃'}`,duration: 10000, })
+      toast.success(`${3 - _.toNumber(count)} swipes left!`, { icon: `${3 - _.toNumber(count) < 1 ? '😨' : '🔃'}`, duration: 10000 })
       toast.dismiss(t)
     })
     // setWhitelist()
@@ -680,7 +681,11 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                   .map((item, i) => {
                     return (
                       <div key={i} className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`} onClick={(e) => handleTokenDetail(item.tokenId)}>
-                        <embed type="image/svg+xml" style={{ pointerEvents: ` none` }} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                        {/* <embed type="image/svg+xml" style={{ pointerEvents: ` none` }} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                         */}
+                         <object data={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} type="image/svg+xml">
+  <img src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+</object>
                         <div className={`${styles.token__body} w-100`}>
                           <ul style={{ background: `var(--black)`, color: `#fff` }}>
                             <li>
