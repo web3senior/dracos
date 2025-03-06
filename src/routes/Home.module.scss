@@ -224,7 +224,7 @@ padding: 1rem;
     margin: 0.4rem 0;
   }
 
-  embed {
+  embed,object {
     zoom: 0.85;
   }
 
@@ -269,7 +269,7 @@ padding: 1rem;
   overflow: hidden;
   cursor: pointer;
 
-  embed {
+  embed, object {
     width: 100%;
   }
 
