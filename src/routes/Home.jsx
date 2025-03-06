@@ -599,7 +599,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                 <div className={`${styles.token__body} w-100`}>
                   <ul style={{ background: `var(--black)`, color: `#fff` }}>
                     <li>
-                      <h3>#{_.toNumber(item.tokenId)}</h3>
+                      <h3>#{_.toNumber(tokenDetail.tokenId)}</h3>
                     </li>
                     <li>Trait count: {tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</li>
                     <li>Base: {tokenDetail.LSP4Metadata.attributes[0].value}</li>
