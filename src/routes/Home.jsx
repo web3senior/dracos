@@ -599,7 +599,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                 <div className={`${styles.token__body} w-100`}>
                   <ul style={{ background: `var(--black)`, color: `#fff` }}>
                     <li>
-                      <h3># {tokenDetail.tokenId.slice(-4)}</h3>
+                      <h3>#{_.toNumber(item.tokenId)}</h3>
                     </li>
                     <li>Trait count: {tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</li>
                     <li>Base: {tokenDetail.LSP4Metadata.attributes[0].value}</li>
@@ -685,7 +685,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                       <div key={i} className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`} onClick={(e) => handleTokenDetail(item.tokenId)}>
                         {/* <embed type="image/svg+xml" style={{ pointerEvents: ` none` }} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                          */}
-                            <img className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                        <img className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                         {/* <object data={`https://ipfs.io/ipfs/bafybeifkvtmwqzjfpqjkd5jetjh7u7b6ixs36fwjvydne3s6sceduwn3g4`} type="image/svg+xml">
                           <img src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                         </object> */}
