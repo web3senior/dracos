@@ -200,7 +200,7 @@ function Home() {
   const getMintPrice = async () => await contractReadonly.methods.mintPrice().call()
   const getSwipePrice = async () => await contractReadonly.methods.swipePrice().call()
   const getWhitelist = async (addr) => await contractReadonly.methods.getWhitelist(addr).call()
-  const getSwipePool = async (tokenId, addr) => await contractReadonly.methods.swipePool(tokenId, addr).call()
+  const getSwipePool = async (tokenId) => await contractReadonly.methods.swipePool(tokenId).call()
 
   const mint = async (e) => {
     const web3 = new Web3(auth.provider)
@@ -445,6 +445,17 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     // setWhitelist()
   }
 
+  const showSwipeCheckerModal = async (e) => {
+    let addr = prompt('Enter the tokenId', '')
+    if (addr === null) return
+
+    const t = toast.loading(`Reading`)
+    getSwipePool(addr).then((count) => {
+      toast.success(`${count} swipes left!`, { icon: `🔃` })
+      toast.dismiss(t)
+    })
+    // setWhitelist()
+  }
   const handleTokenDetail = async (tokenId) => {
     setSwipeModal(false)
     setTokenDetailModal(true)
@@ -758,6 +769,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                 Swipe
               </button>
               <button onClick={(e) => showWhitelistModal(e)}>Whitelist Checker</button>
+              <button onClick={(e) => showSwipeCheckerModal(e)}>Swipe Checker</button>
             </footer>
           </>
         )}

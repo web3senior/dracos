@@ -150,6 +150,10 @@
       background-color: var(--warning);
       color: var(--white);
     }
+    &:nth-child(3) {
+      background-color: var(--green);
+      color: var(--white);
+    }
     &:last-child {
       background-color: var(--gray);
       color: var(--white);
