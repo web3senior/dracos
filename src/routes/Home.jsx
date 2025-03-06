@@ -481,7 +481,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
 
     getDataForTokenId(tokenId).then((data) => {
       data = _.hexToUtf8(data)
-      data = data.slice(data.search(`data:application/json;`), data.length)
+      data = data.search(`data:application/json;`) > -1 ? data.slice(data.search(`data:application/json;`), data.length) : `${import.meta.env.VITE_IPFS_GATEWAY}` + data.slice(data.search(`ipfs://`), data.length).replace(`ipfs://`, '')
 
       fetchData(data).then((dataContent) => {
         console.log(dataContent)
