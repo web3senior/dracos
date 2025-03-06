@@ -142,20 +142,20 @@
       opacity: 0.2;
     }
 
-    &:first-child {
-      background-color: var(--color-primary);
+    &:nth-child(1) {
+      background-color: red;
       color: var(--white);
     }
     &:nth-child(2) {
-      background-color: var(--warning);
+      background-color: rgba(255, 0, 0, 0.7);
       color: var(--white);
     }
     &:nth-child(3) {
-      background-color: var(--green);
+      background-color:rgba(255, 0, 0, 0.5);
       color: var(--white);
     }
-    &:last-child {
-      background-color: var(--gray);
+    &:nth-child(4) {
+      background-color: rgba(255, 0, 0, 0.3);
       color: var(--white);
     }
   }
