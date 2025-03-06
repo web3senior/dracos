@@ -812,8 +812,8 @@ const Whitelist = ({ setFreeMintCount }) => {
 
   if (status !== `loading`) {
     return (
-      <div className={`${styles['freeMint']} mt-10 ms-fontWeight-bold`}>
-        <p>{count}</p>
+      <div className={`${styles['freeMint']} mt-10 ms-fontWeight-bold ms-depth-4`}>
+        <small>{count}</small>
       </div>
     )
   } else return <>Loading data...</>

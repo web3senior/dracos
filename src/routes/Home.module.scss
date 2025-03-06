@@ -164,14 +164,14 @@
 .freeMint {
   
   width: 200px;
-  height: 80px;;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background-color: var(--red-050);
-  color: var(--danger);
+  background-color: var(--black-050);
+  color: var(--dark);
+padding: 1rem;
 
   &:after {
     content: 'free mint';
