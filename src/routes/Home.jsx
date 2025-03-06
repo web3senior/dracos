@@ -455,7 +455,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
 
     const t = toast.loading(`Reading`)
     getSwipePool(paddedHex).then((count) => {
-      toast.success(`${3 - _.toNumber(count)} swipes left!`, { icon: `🔃`,duration: 10000, })
+      toast.success(`${3 - _.toNumber(count)} swipes left!`, { icon: `${_.toNumber(count) < 1 ? '😨':'🔃'}`,duration: 10000, })
       toast.dismiss(t)
     })
     // setWhitelist()
