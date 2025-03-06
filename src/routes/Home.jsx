@@ -446,12 +446,16 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
   }
 
   const showSwipeCheckerModal = async (e) => {
-    let addr = prompt('Enter the tokenId', '')
-    if (addr === null) return
+    let input = prompt('Enter the token number:', '')
+    if (input === null) return
+    let hex = _.numberToHex(input)
+    console.log(hex)
+    let paddedHex = _.padLeft(hex, 64)
+    console.log(paddedHex)
 
     const t = toast.loading(`Reading`)
-    getSwipePool(addr).then((count) => {
-      toast.success(`${count} swipes left!`, { icon: `🔃` })
+    getSwipePool(paddedHex).then((count) => {
+      toast.success(`${3 - _.toNumber(count)} swipes left!`, { icon: `🔃` })
       toast.dismiss(t)
     })
     // setWhitelist()
@@ -807,7 +811,11 @@ const Whitelist = ({ setFreeMintCount }) => {
     })
 
   if (status !== `loading`) {
-    return <small className={`badge badge-success mt-10 ms-fontWeight-bold`}>You have {count} free mints remaining!</small>
+    return (
+      <div className={`${styles['freeMint']} mt-10 ms-fontWeight-bold`}>
+        <p>{count}</p>
+      </div>
+    )
   } else return <>Loading data...</>
 }
 
