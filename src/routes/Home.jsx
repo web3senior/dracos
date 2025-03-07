@@ -816,13 +816,12 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                   <b style={{ color: `var(--teal)` }}>Open!</b>
                 </li>
               </ul>
-
-              {auth.walletConnected && <Whitelist setFreeMintCount={setFreeMintCount} />}
             </main>
 
             <footer className={`${styles.footer} grid grid--fit ms-motion-slideDownIn`} style={{ '--data-width': '200px' }}>
-              <button onClick={(e) => mint(e)} disabled={!auth.walletConnected}>
+              <button onClick={(e) => mint(e)} disabled={!auth.walletConnected} className={`d-f-c`}>
                 Mint
+                {auth.walletConnected && <Whitelist setFreeMintCount={setFreeMintCount} />}
               </button>
               <button onClick={(e) => showSwipe(e)} disabled={!auth.walletConnected}>
                 Swipe
@@ -867,8 +866,8 @@ const Whitelist = ({ setFreeMintCount }) => {
 
   if (status !== `loading`) {
     return (
-      <div className={`${styles['freeMint']} mt-10 ms-fontWeight-bold ms-depth-4`}>
-        <small>{count}</small>
+      <div className={`${styles['freeMint']} ms-fontWeight-bold`}>
+       {count}
       </div>
     )
   } else return <>Loading data...</>
