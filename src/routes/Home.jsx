@@ -58,7 +58,7 @@ function Home() {
     for (const item of items) {
       weightSum += item.weight
       if (randomNum <= weightSum) {
-//        console.log(item.name)
+        //        console.log(item.name)
         return item.name
       }
     }
@@ -87,7 +87,7 @@ function Home() {
     // Clear the board
     // SVG.current.innerHTML = ''
     const randomTrait = weightedRandom(Metadata[`${trait}`])
-//    console.log(`${BASE_URL}${trait}/${randomTrait}.png`)
+    //    console.log(`${BASE_URL}${trait}/${randomTrait}.png`)
     let response = await fetch(`${BASE_URL}${trait}/${randomTrait}.png`, { mode: 'no-cors' })
     let blob = await response.blob()
 
@@ -101,7 +101,7 @@ function Home() {
       image.setAttribute('height', 400)
       image.setAttribute('x', 0)
       image.setAttribute('y', 0)
-//      image.addEventListener('load', () => console.log(`${trait} has been loaded`))
+      //      image.addEventListener('load', () => console.log(`${trait} has been loaded`))
 
       // Add to the group
       switch (trait) {
@@ -145,10 +145,10 @@ function Home() {
 
   const generateMetadata = async (base, background, eyes, mouth, head, clothing, back) => {
     const uploadResult = await upload()
-   // console.log(`uploadResult => `, uploadResult)
+    // console.log(`uploadResult => `, uploadResult)
     const verifiableUrl = await rAsset(uploadResult[1])
-   // console.log(`verifiableUrl:`, verifiableUrl)
-  //  console.log(_.keccak256(verifiableUrl))
+    // console.log(`verifiableUrl:`, verifiableUrl)
+    //  console.log(_.keccak256(verifiableUrl))
     return [uploadResult[0], verifiableUrl]
   }
 
@@ -188,7 +188,7 @@ function Home() {
       const t = toast.loading(`Uploading`)
       const file = new File([blob], 'test.svg', { type: blob.type })
       const upload = await pinata.upload.file(file)
-     // console.log(upload)
+      // console.log(upload)
       toast.dismiss(t)
       return [upload.IpfsHash, url]
     } catch (error) {
@@ -204,6 +204,7 @@ function Home() {
   const getSwipePool = async (tokenId) => await contractReadonly.methods.swipePool(tokenId).call()
 
   const mint = async (e) => {
+    e.target.disabled = true
     const web3 = new Web3(auth.provider)
     const contract = new web3.eth.Contract(ABI, import.meta.env.VITE_CONTRACT)
 
@@ -285,6 +286,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
 
             toast.success(`Done`)
             toast.dismiss(t)
+            e.target.disabled = false
 
             showSwipe()
 
@@ -423,11 +425,11 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
       console.log(item)
       getDataForTokenId(item).then((data) => {
         data = _.hexToUtf8(data)
-      //  console.log(data)
+        //  console.log(data)
         data = data.search(`data:application/json;`) > -1 ? data.slice(data.search(`data:application/json;`), data.length) : `${import.meta.env.VITE_IPFS_GATEWAY}` + data.slice(data.search(`ipfs://`), data.length).replace(`ipfs://`, '')
         console.log(data)
         fetchData(data).then((dataContent) => {
-//          console.log(dataContent)
+          //          console.log(dataContent)
           dataContent.tokenId = item
           setToken((token) => token.concat(dataContent))
         })
@@ -451,9 +453,9 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     let input = prompt('Enter the token number:', '')
     if (input === null) return
     let hex = _.numberToHex(input)
-   // console.log(hex)
+    // console.log(hex)
     let paddedHex = _.padLeft(hex, 64)
-//console.log(paddedHex)
+    //console.log(paddedHex)
 
     const t = toast.loading(`Reading`)
     getSwipePool(paddedHex).then((count) => {
@@ -469,13 +471,13 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     // Read connect wallet profile
     if (auth.walletConnected) {
       handleSearchProfile(auth.accounts[0]).then((profile) => {
-       // console.log(profile)
+        // console.log(profile)
         setProfile(profile)
       })
 
       // Read how many swipes left
       getSwipePool(tokenId, auth.accounts[0]).then((res) => {
-       // console.log(res)
+        // console.log(res)
         setSwipeCount(_.toNumber(res))
       })
     }
@@ -485,9 +487,9 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
       data = data.search(`data:application/json;`) > -1 ? data.slice(data.search(`data:application/json;`), data.length) : `${import.meta.env.VITE_IPFS_GATEWAY}` + data.slice(data.search(`ipfs://`), data.length).replace(`ipfs://`, '')
 
       fetchData(data).then((dataContent) => {
-       // console.log(dataContent)
+        // console.log(dataContent)
         dataContent.tokenId = tokenId
-       // console.log(dataContent)
+        // console.log(dataContent)
         setTokenDetail(dataContent)
       })
     })
@@ -596,22 +598,25 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
               <div className={`${styles.token} d-f-c flex-column ms-depth-8`}>
                 {/* <embed type="image/svg+xml" src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                  */}
-                <img  style={{height: `260px`}}
-                className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                <img style={{ height: `260px` }} className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                 <div className={`${styles.token__body} w-100`}>
                   <ul style={{ background: `var(--black)`, color: `#fff` }}>
                     <li>
                       <h3>#{_.toNumber(tokenDetail.tokenId)}</h3>
                     </li>
-                    <li>Trait count: <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b></li>
-                    {
-                      tokenDetail.LSP4Metadata.attributes.map(item => <li>{item.key}: <b>{item.value}</b></li>)
-                    }
+                    <li>
+                      Trait count: <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b>
+                    </li>
+                    {tokenDetail.LSP4Metadata.attributes.map((item) => (
+                      <li>
+                        {item.key}: <b>{item.value}</b>
+                      </li>
+                    ))}
                   </ul>
                   <a href={`https://universal.page/collections/lukso/${import.meta.env.VITE_CONTRACT}/${_.toNumber(tokenDetail.tokenId)}`} target={`_blank`} className={`${styles['uppage']} d-f-c`}>
-                        <img src={PpageLogo}/>
-                        <small>View on Universal Page</small>
-                      </a>
+                    <img src={PpageLogo} />
+                    <small>View on Universal Page</small>
+                  </a>
                 </div>
               </div>
             </main>
@@ -693,7 +698,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                       <div key={i} className={`${styles.token} d-f-c flex-column ms-depth-16`} onClick={(e) => handleTokenDetail(item.tokenId)}>
                         {/* <embed type="image/svg+xml" style={{ pointerEvents: ` none` }} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                          */}
-                            <img className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                        <img className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                         {/* <object data={`https://ipfs.io/ipfs/bafybeifkvtmwqzjfpqjkd5jetjh7u7b6ixs36fwjvydne3s6sceduwn3g4`} type="image/svg+xml">
                           <img src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                         </object> */}
@@ -702,8 +707,12 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                             <li>
                               <h3>#{_.toNumber(item.tokenId)}</h3>
                             </li>
-                            <li>Trait count: <b>{item.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b></li>
-                            <li>Base: <b>{item.LSP4Metadata.attributes[0].value}</b></li>
+                            <li>
+                              Trait count: <b>{item.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b>
+                            </li>
+                            <li>
+                              Base: <b>{item.LSP4Metadata.attributes[0].value}</b>
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -761,14 +770,14 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                 <li className={`d-flex flex-column`}>
                   <h4>Mint price</h4>
                   <b className={`d-f-c grid--gap-025`}>
-                    <img alt={`⏣`} src={LYXbadge} style={{width:`16px`}}/>
+                    <img alt={`⏣`} src={LYXbadge} style={{ width: `16px` }} />
                     {mintPrice && mintPrice > 0 && <span>{_.fromWei(mintPrice, `ether`)}</span>}
                   </b>
                 </li>
                 <li className={`d-flex flex-column`}>
                   <h4>Swipe price</h4>
                   <b className={`d-f-c grid--gap-025`}>
-                    <img alt={`⏣`} src={LYXbadge} style={{width:`16px`}} />
+                    <img alt={`⏣`} src={LYXbadge} style={{ width: `16px` }} />
                     {swipePrice && swipePrice > 0 && <span>{_.fromWei(swipePrice, `ether`)}</span>}
                   </b>
                 </li>
