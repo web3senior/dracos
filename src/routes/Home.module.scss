@@ -220,7 +220,22 @@ padding: 1rem;
   }
 }
 
+.uppage {
+  background-color: rgba(2,2,2, .8);
+
+width: 100%;
+font-size: 10px;
+color: #9d97fc;
+column-gap: .5rem;
+padding: .3rem 0;
+
+  img {
+    width: 12px;
+  }
+}
+
 .tokenDetail {
+  position: relative;
   header {
     background-color: var(--black-050);
     border-radius: 999px;
@@ -270,6 +285,7 @@ padding: 1rem;
 }
 
 .token {
+  position: relative;
   border-radius: var(--global-border-radius);
   overflow: hidden;
   cursor: pointer;

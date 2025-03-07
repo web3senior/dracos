@@ -5,6 +5,7 @@ import { useUpProvider } from '../contexts/UpProvider'
 import { PinataSDK } from 'pinata'
 import ABI from '../abi/Dracos.json'
 import LYXbadge from './../assets/⏣.svg'
+import PpageLogo from './../assets/upage.svg'
 import DracosEyes from './../assets/dracos-eyes.png'
 import Web3 from 'web3'
 import styles from './Home.module.scss'
@@ -605,6 +606,10 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                     <li>Trait count: <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b></li>
                     <li>Base: <b>{tokenDetail.LSP4Metadata.attributes[0].value}</b></li>
                   </ul>
+                  <a href={`https://universal.page/collections/lukso/${import.meta.env.VITE_CONTRACT}/${_.toNumber(tokenDetail.tokenId)}`} target={`_blank`} className={`${styles['uppage']} d-f-c`}>
+                        <img src={PpageLogo}/>
+                        <small>View on Universal Page</small>
+                      </a>
                 </div>
               </div>
             </main>
