@@ -57,7 +57,7 @@ function Home() {
     for (const item of items) {
       weightSum += item.weight
       if (randomNum <= weightSum) {
-        console.log(item.name)
+//        console.log(item.name)
         return item.name
       }
     }
