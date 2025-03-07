@@ -86,7 +86,7 @@ function Home() {
     // Clear the board
     // SVG.current.innerHTML = ''
     const randomTrait = weightedRandom(Metadata[`${trait}`])
-    console.log(`${BASE_URL}${trait}/${randomTrait}.png`)
+//    console.log(`${BASE_URL}${trait}/${randomTrait}.png`)
     let response = await fetch(`${BASE_URL}${trait}/${randomTrait}.png`, { mode: 'no-cors' })
     let blob = await response.blob()
 
@@ -100,7 +100,7 @@ function Home() {
       image.setAttribute('height', 400)
       image.setAttribute('x', 0)
       image.setAttribute('y', 0)
-      image.addEventListener('load', () => console.log(`${trait} has been loaded`))
+//      image.addEventListener('load', () => console.log(`${trait} has been loaded`))
 
       // Add to the group
       switch (trait) {
@@ -592,7 +592,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
               )}
             </header>
             <main className={`${styles.main} d-f-c`}>
-              <div className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`}>
+              <div className={`${styles.token} d-f-c flex-column ms-depth-8`}>
                 {/* <embed type="image/svg+xml" src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                  */}
                 <img  style={{height: `260px`}}
@@ -683,7 +683,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                   .sort((a, b) => _.toNumber(a.tokenId) - _.toNumber(b.tokenId))
                   .map((item, i) => {
                     return (
-                      <div key={i} className={`${styles.token} d-f-c flex-column border border--danger ms-depth-8`} onClick={(e) => handleTokenDetail(item.tokenId)}>
+                      <div key={i} className={`${styles.token} d-f-c flex-column ms-depth-16`} onClick={(e) => handleTokenDetail(item.tokenId)}>
                         {/* <embed type="image/svg+xml" style={{ pointerEvents: ` none` }} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                          */}
                             <img className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
