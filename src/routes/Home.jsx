@@ -144,10 +144,10 @@ function Home() {
 
   const generateMetadata = async (base, background, eyes, mouth, head, clothing, back) => {
     const uploadResult = await upload()
-    console.log(`uploadResult => `, uploadResult)
+   // console.log(`uploadResult => `, uploadResult)
     const verifiableUrl = await rAsset(uploadResult[1])
-    console.log(`verifiableUrl:`, verifiableUrl)
-    console.log(_.keccak256(verifiableUrl))
+   // console.log(`verifiableUrl:`, verifiableUrl)
+  //  console.log(_.keccak256(verifiableUrl))
     return [uploadResult[0], verifiableUrl]
   }
 
@@ -187,7 +187,7 @@ function Home() {
       const t = toast.loading(`Uploading`)
       const file = new File([blob], 'test.svg', { type: blob.type })
       const upload = await pinata.upload.file(file)
-      console.log(upload)
+     // console.log(upload)
       toast.dismiss(t)
       return [upload.IpfsHash, url]
     } catch (error) {
@@ -225,7 +225,7 @@ function Home() {
     if (clothing.toUpperCase() !== `NONE`) attributes.push({ key: 'Clothing', value: clothing.toUpperCase() })
     if (back.toUpperCase() !== `NONE`) attributes.push({ key: 'Back', value: back.toUpperCase() })
 
-    console.log(`Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`)
+    // console.log(`Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`)
     generateMetadata(base, background, eyes, mouth, head, clothing, back).then((result) => {
       toast.dismiss(createToast)
       const t = toast.loading(`Waiting for transaction's confirmation`)
@@ -450,9 +450,9 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     let input = prompt('Enter the token number:', '')
     if (input === null) return
     let hex = _.numberToHex(input)
-    console.log(hex)
+   // console.log(hex)
     let paddedHex = _.padLeft(hex, 64)
-    console.log(paddedHex)
+//console.log(paddedHex)
 
     const t = toast.loading(`Reading`)
     getSwipePool(paddedHex).then((count) => {
@@ -468,13 +468,13 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     // Read connect wallet profile
     if (auth.walletConnected) {
       handleSearchProfile(auth.accounts[0]).then((profile) => {
-        console.log(profile)
+       // console.log(profile)
         setProfile(profile)
       })
 
       // Read how many swipes left
       getSwipePool(tokenId, auth.accounts[0]).then((res) => {
-        console.log(res)
+       // console.log(res)
         setSwipeCount(_.toNumber(res))
       })
     }
@@ -484,9 +484,9 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
       data = data.search(`data:application/json;`) > -1 ? data.slice(data.search(`data:application/json;`), data.length) : `${import.meta.env.VITE_IPFS_GATEWAY}` + data.slice(data.search(`ipfs://`), data.length).replace(`ipfs://`, '')
 
       fetchData(data).then((dataContent) => {
-        console.log(dataContent)
+       // console.log(dataContent)
         dataContent.tokenId = tokenId
-        console.log(dataContent)
+       // console.log(dataContent)
         setTokenDetail(dataContent)
       })
     })
@@ -813,7 +813,7 @@ const Whitelist = ({ setFreeMintCount }) => {
     .whitelist(auth.accounts[0])
     .call()
     .then((res) => {
-      console.log(`Whitelist => `, res)
+      //console.log(`Whitelist => `, res)
       setCount(web3.utils.toNumber(res))
       setFreeMintCount(web3.utils.toNumber(res))
       setStatus(``)
