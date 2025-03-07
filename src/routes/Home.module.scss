@@ -299,6 +299,8 @@ padding: .3rem 0;
       padding: 0.9rem;
       display: flex;
       flex-flow: column nowrap;
+      max-height: 120px;
+      overflow-y: auto;
 
       li {
         &:not(:first-child) {

@@ -604,7 +604,9 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                       <h3>#{_.toNumber(tokenDetail.tokenId)}</h3>
                     </li>
                     <li>Trait count: <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b></li>
-                    <li>Base: <b>{tokenDetail.LSP4Metadata.attributes[0].value}</b></li>
+                    {
+                      tokenDetail.LSP4Metadata.attributes.map(item => <li>{item.key}: <b>{item.value}</b></li>)
+                    }
                   </ul>
                   <a href={`https://universal.page/collections/lukso/${import.meta.env.VITE_CONTRACT}/${_.toNumber(tokenDetail.tokenId)}`} target={`_blank`} className={`${styles['uppage']} d-f-c`}>
                         <img src={PpageLogo}/>
