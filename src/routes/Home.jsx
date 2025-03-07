@@ -7,8 +7,15 @@ import ABI from '../abi/Dracos.json'
 import LYXbadge from './../assets/⏣.svg'
 import PpageLogo from './../assets/upage.svg'
 import DracosEyes from './../assets/dracos-eyes.png'
+
+import IconSwipe from './../assets/icon-swipe.svg'
+import IconLike from './../assets/icon-like.svg'
+import IconDownload from './../assets/icon-download.svg'
+import IconView from './../assets/icon-view.svg'
+
 import Web3 from 'web3'
 import styles from './Home.module.scss'
+import { useNavigate } from 'react-router'
 
 const pinata = new PinataSDK({
   pinataJwt: import.meta.env.VITE_PINATA_API_KEY,
@@ -30,6 +37,9 @@ function Home() {
   const [tokenDetail, setTokenDetail] = useState()
 
   const [freeMintCount, setFreeMintCount] = useState(0)
+
+  const canvasRef = useRef()
+  const navigate = useNavigate()
 
   const auth = useUpProvider()
 
@@ -464,6 +474,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     })
     // setWhitelist()
   }
+
   const handleTokenDetail = async (tokenId) => {
     setSwipeModal(false)
     setTokenDetailModal(true)
@@ -489,8 +500,19 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
       fetchData(data).then((dataContent) => {
         // console.log(dataContent)
         dataContent.tokenId = tokenId
-        // console.log(dataContent)
+        console.log(dataContent)
         setTokenDetail(dataContent)
+
+        // add the image to canvas
+        var can = document.getElementById('canvas')
+        var ctx = can.getContext('2d')
+
+        var img = new Image()
+        img.onload = function () {
+          ctx.drawImage(img, 0, 0, can.width, can.height)
+        }
+        img.crossOrigin = `anonymous`
+        img.src = `${import.meta.env.VITE_IPFS_GATEWAY}${dataContent.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`
       })
     })
   }
@@ -527,6 +549,14 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     return data
   }
 
+  const downloadCanvas = function (tokenId) {
+    const link = document.createElement('a')
+    link.download = `${tokenId}.png`
+    link.href = canvasRef.current.toDataURL()
+    link.click()
+    link.remove()
+  }
+
   useEffect(() => {
     console.clear()
 
@@ -556,7 +586,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
       <div className={`${styles.page} __container`} data-width={`medium`}>
         <Toaster />
 
-        {tokenDetailModal && tokenDetail && (
+        {tokenDetailModal && (
           <div className={`${styles.tokenDetail}`}>
             <button
               className={`${styles.back} ms-depth-4`}
@@ -598,56 +628,56 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
               <div className={`${styles.token} d-f-c flex-column ms-depth-8`}>
                 {/* <embed type="image/svg+xml" src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                  */}
-                <img style={{ height: `260px` }} className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
-                <div className={`${styles.token__body} w-100`}>
-                  <ul style={{ background: `var(--black)`, color: `#fff` }}>
-                    <li>
-                      <h3>#{_.toNumber(tokenDetail.tokenId)}</h3>
-                    </li>
-                    <li>
-                      Trait count: <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b>
-                    </li>
-                    {tokenDetail.LSP4Metadata.attributes.map((item) => (
+                {/* <img style={{ height: `260px` }} className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} /> */}
+                <canvas ref={canvasRef} id={`canvas`} width="800" height="800"></canvas>
+                {tokenDetail && (
+                  <div className={`${styles.token__body} w-100`}>
+                    <ul style={{ background: `var(--black)`, color: `#fff` }}>
                       <li>
-                        {item.key}: <b>{item.value}</b>
+                        <h3>#{_.toNumber(tokenDetail.tokenId)}</h3>
                       </li>
-                    ))}
-                  </ul>
-                  <a href={`https://universal.page/collections/lukso/${import.meta.env.VITE_CONTRACT}/${_.toNumber(tokenDetail.tokenId)}`} target={`_blank`} className={`${styles['uppage']} d-f-c`}>
-                    <img src={PpageLogo} />
-                    <small>View on Universal Page</small>
-                  </a>
-                </div>
+                      <li>
+                        Trait count: <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b>
+                      </li>
+                      {tokenDetail.LSP4Metadata.attributes.map((item, i) => (
+                        <li key={i}>
+                          {item.key}: <b>{item.value}</b>
+                        </li>
+                      ))}
+                    </ul>
+                    <a href={`https://universal.page/collections/lukso/${import.meta.env.VITE_CONTRACT}/${_.toNumber(tokenDetail.tokenId)}`} target={`_blank`} className={`${styles['uppage']} d-f-c`}>
+                      <img src={PpageLogo} />
+                      <small>View on Universal Page</small>
+                    </a>
+                  </div>
+                )}
               </div>
             </main>
-            <footer>
-              <button title="Swipe" onClick={(e) => swipe(e, tokenDetail.tokenId)}>
-                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M11.4106 28.0814L18.9998 20.4922L26.589 28.0814L28.081 26.5894L20.4918 19.0002L28.081 11.411L26.589 9.91899L18.9998 17.5082L11.4106 9.91899L9.91863 11.411L17.5078 19.0002L9.91863 26.5894L11.4106 28.0814ZM19.0067 37.9732C16.3831 37.9732 13.9165 37.4753 11.6067 36.4796C9.29726 35.4838 7.28823 34.1325 5.57961 32.4257C3.87099 30.7188 2.51846 28.7115 1.52203 26.4039C0.525247 24.0965 0.0268555 21.6309 0.0268555 19.007C0.0268555 16.3835 0.52472 13.9168 1.52045 11.6071C2.51618 9.29763 3.86748 7.2886 5.57434 5.57998C7.28121 3.87136 9.28848 2.51883 11.5962 1.5224C13.9035 0.525613 16.3691 0.0272217 18.993 0.0272217C21.6165 0.0272217 24.0832 0.525088 26.393 1.52082C28.7024 2.51655 30.7114 3.86784 32.42 5.57471C34.1287 7.28157 35.4812 9.28884 36.4776 11.5965C37.4744 13.9038 37.9728 16.3695 37.9728 18.9933C37.9728 21.6169 37.4749 24.0835 36.4792 26.3933C35.4835 28.7028 34.1322 30.7118 32.4253 32.4204C30.7184 34.129 28.7112 35.4816 26.4035 36.478C24.0962 37.4748 21.6306 37.9732 19.0067 37.9732Z"
-                    fill="#FFCB57"
-                  />
-                </svg>
-              </button>
+            {tokenDetail && (
+              <footer>
+                <button className={`${styles['swipe']} d-f-c ms-depth-4`} title={`Swipe`} onClick={(e) => swipe(e, tokenDetail.tokenId)}>
+                  <img alt={`S`} src={IconSwipe} />
+                </button>
 
-              <a href={`../`}>
-                <svg width="39" height="35" viewBox="0 0 39 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M19.4573 34.135L17.8599 32.692C14.4195 29.5488 11.5736 26.8583 9.32209 24.6206C7.07098 22.3825 5.29402 20.4087 3.99121 18.6994C2.6884 16.9901 1.77823 15.4434 1.26069 14.0595C0.743145 12.6758 0.484375 11.284 0.484375 9.88383C0.484375 7.20266 1.39525 4.95138 3.21701 3.12997C5.03842 1.30822 7.2897 0.397339 9.97086 0.397339C11.8249 0.397339 13.5641 0.871663 15.1884 1.82031C16.8127 2.76896 18.2357 4.14872 19.4573 5.95958C20.679 4.14872 22.102 2.76896 23.7263 1.82031C25.3506 0.871663 27.0898 0.397339 28.9438 0.397339C31.625 0.397339 33.8763 1.30822 35.6977 3.12997C37.5194 4.95138 38.4303 7.20266 38.4303 9.88383C38.4303 11.284 38.1716 12.6758 37.654 14.0595C37.1365 15.4434 36.2263 16.9901 34.9235 18.6994C33.6207 20.4087 31.8504 22.3825 29.6126 24.6206C27.3749 26.8583 24.5223 29.5488 21.0548 32.692L19.4573 34.135Z"
-                    fill="#FE69B4"
-                  />
-                </svg>
-              </a>
+                <button
+                  className={`${styles['like']} d-f-c ms-depth-4`}
+                  onClick={() => {
+                    setSwipeModal(true)
+                    setTokenDetailModal(false)
+                  }}
+                >
+                  <img alt={`L`} src={IconLike} />
+                </button>
 
-              <button title="Download" onClick={(e) => download(`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`)}>
-                <svg width="39" height="26" viewBox="0 0 39 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M19.6906 20.2804C21.7486 20.2804 23.4966 19.5722 24.9344 18.1558C26.3722 16.7394 27.0911 15.0195 27.0911 12.996C27.0911 10.9725 26.3708 9.25387 24.9303 7.84018C23.4898 6.42649 21.7405 5.71964 19.6824 5.71964C17.6244 5.71964 15.8765 6.42783 14.4387 7.8442C13.0009 9.26057 12.2819 10.9805 12.2819 13.004C12.2819 15.0275 13.0022 16.7461 14.4427 18.1598C15.8833 19.5735 17.6326 20.2804 19.6906 20.2804ZM19.6865 17.8214C18.3244 17.8214 17.1666 17.3527 16.2131 16.4152C15.2596 15.4777 14.7828 14.3393 14.7828 13C14.7828 11.6607 15.2596 10.5223 16.2131 9.58482C17.1666 8.64732 18.3244 8.17857 19.6865 8.17857C21.0487 8.17857 22.2065 8.64732 23.16 9.58482C24.1135 10.5223 24.5902 11.6607 24.5902 13C24.5902 14.3393 24.1135 15.4777 23.16 16.4152C22.2065 17.3527 21.0487 17.8214 19.6865 17.8214ZM19.6888 25.5C15.5125 25.5 11.7071 24.3673 8.27272 22.1018C4.83832 19.8366 2.30959 16.8027 0.686523 13C2.30959 9.19732 4.83741 6.16339 8.27 3.89821C11.7029 1.63274 15.5076 0.5 19.6843 0.5C23.8606 0.5 27.6659 1.63274 31.1003 3.89821C34.5347 6.16339 37.0635 9.19732 38.6865 13C37.0635 16.8027 34.5356 19.8366 31.1031 22.1018C27.6702 24.3673 23.8654 25.5 19.6888 25.5Z"
-                    fill="#3A8BF0"
-                  />
-                </svg>
-              </button>
-            </footer>
+                <button className={`${styles['download']} d-f-c ms-depth-4`} title={`Download`} onClick={(e) => downloadCanvas(tokenDetail.tokenId)}>
+                  <img alt={`D`} src={IconDownload} />
+                </button>
+
+                <button className={`${styles['view']} d-f-c ms-depth-4`} title={`View`} onClick={(e) => download(`${import.meta.env.VITE_IPFS_GATEWAY}${tokenDetail.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`)}>
+                  <img alt={`V`} src={IconView} />
+                </button>
+              </footer>
+            )}
           </div>
         )}
 
