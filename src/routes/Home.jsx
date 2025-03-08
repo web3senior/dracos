@@ -613,7 +613,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                     </div>
                     <div className={`d-flex flex-column`}>
                       <b>{3 - swipeCount} swipes left</b>
-                      <small>Your Dracos is waiting!</small>
+                      <b style={{fontSize:`10px`, opacity:.7}}>Your Dracos is waiting!</b>
                     </div>
                   </li>
                   <li>
@@ -636,12 +636,12 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                       <li>
                         <h3>#{_.toNumber(tokenDetail.tokenId)}</h3>
                       </li>
-                      <li>
-                        Trait count: <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b>
+                      <li className={`d-flex align-items-center justify-content-between`}>
+                        <span>Trait count</span> <b>{tokenDetail.LSP4Metadata.attributes.filter((item) => item.value !== `NONE`).length}</b>
                       </li>
                       {tokenDetail.LSP4Metadata.attributes.map((item, i) => (
-                        <li key={i}>
-                          {item.key}: <b>{item.value}</b>
+                        <li key={i} className={`d-flex align-items-center justify-content-between`}>
+                          <span>{item.key}</span> <b>{item.value}</b>
                         </li>
                       ))}
                     </ul>
@@ -757,7 +757,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
           <>
             <header className={`${styles.header} d-f-c`}>
               <figure className={`d-f-c flex-column`}>
-                <img alt={import.meta.env.VITE_NAME} src={`/logo.svg`} className={`rounded`} />
+                <img alt={import.meta.env.VITE_NAME} src={`/logo.svg`} className={`rounded ms-depth-8`} />
                 <figcaption className={`mt-10`}>
                   <svg width="69" height="28" viewBox="0 0 69 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -819,15 +819,15 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
             </main>
 
             <footer className={`${styles.footer} grid grid--fit ms-motion-slideDownIn`} style={{ '--data-width': '200px' }}>
-              <button onClick={(e) => mint(e)} disabled={!auth.walletConnected} className={`d-f-c`}>
+              <button onClick={(e) => mint(e)} disabled={!auth.walletConnected} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>
                 Mint
                 {auth.walletConnected && <Whitelist setFreeMintCount={setFreeMintCount} />}
               </button>
-              <button onClick={(e) => showSwipe(e)} disabled={!auth.walletConnected}>
+              <button onClick={(e) => showSwipe(e)} disabled={!auth.walletConnected} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>
                 Swipe
               </button>
-              <button onClick={(e) => showWhitelistModal(e)}>Whitelist Checker</button>
-              <button onClick={(e) => showSwipeCheckerModal(e)}>Swipe Checker</button>
+              <button onClick={(e) => showWhitelistModal(e)} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>Whitelist Checker</button>
+              <button onClick={(e) => showSwipeCheckerModal(e)} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>Swipe Checker</button>
             </footer>
           </>
         )}
@@ -870,7 +870,7 @@ const Whitelist = ({ setFreeMintCount }) => {
        {count}
       </div>
     )
-  } else return <>Loading data...</>
+  } else return <small>Loading ...</small>
 }
 
 const Reload = () => {

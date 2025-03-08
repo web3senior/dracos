@@ -20,6 +20,7 @@ import { createClientUPProvider } from '@lukso/up-provider'
 import { createWalletClient, custom } from 'viem'
 import { lukso, luksoTestnet } from 'viem/chains'
 import { createContext, useContext, useEffect, useState, useMemo } from 'react'
+import {Loading} from './../components/Loading'
 
 const UpContext = createContext(undefined)
 
@@ -128,7 +129,7 @@ export function UpProvider({ children }) {
   }, [client, chainId, accounts, contextAccounts, walletConnected, selectedAddress, isSearching])
 
   // fill contextAccount
-  if (contextAccounts.length === 0) return <>Loading...</>
+  if (contextAccounts.length === 0) return <Loading/>
 
   return (
     <UpContext.Provider value={data}>
