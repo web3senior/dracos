@@ -185,7 +185,7 @@
   background-color: rgba(2, 2, 2, 0.2);
   color: var(--white);
 margin-left: .3rem;
-
+pointer-events: none;
   &:after {
     content: ' free mint';
     text-transform: uppercase;
