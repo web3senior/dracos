@@ -162,20 +162,6 @@ function Home() {
     return [uploadResult[0], verifiableUrl]
   }
 
-  const generateOne = async () => {
-    const background = await generate(`background`)
-    const back = await generate(`back`)
-    const base = await generate(`base`)
-    const clothing = await generate(`clothing`)
-    const eyes = await generate(`eyes`)
-    const mouth = await generate(`mouth`)
-    const head = await generate(`head`)
-
-    // document.querySelector(`#result`).innerHTML = `Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`
-
-    generateMetadata(base, background, eyes, mouth, head, clothing, back)
-  }
-
   const rAsset = async (cid) => {
     const assetBuffer = await fetch(`${cid}`, {
       mode: 'cors',
@@ -204,6 +190,20 @@ function Home() {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const generateOne = async () => {
+    const background = await generate(`background`)
+    const back = await generate(`back`)
+    const base = await generate(`base`)
+    const clothing = await generate(`clothing`)
+    const eyes = await generate(`eyes`)
+    const mouth = await generate(`mouth`)
+    const head = await generate(`head`)
+
+    // document.querySelector(`#result`).innerHTML = `Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`
+
+    generateMetadata(base, background, eyes, mouth, head, clothing, back)
   }
 
   const getTotalSupply = async () => await contractReadonly.methods.totalSupply().call()
