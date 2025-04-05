@@ -47,14 +47,14 @@ function Home() {
   const _ = web3Readonly.utils
   const contractReadonly = new web3Readonly.eth.Contract(ABI, import.meta.env.VITE_CONTRACT)
 
-  const SVG = useRef()
-  const baseGroupRef = useRef()
-  const backgroundGroupRef = useRef()
-  const eyesGroupRef = useRef()
-  const mouthGroupRef = useRef()
-  const headGroupRef = useRef()
-  const clothingGroupRef = useRef()
-  const backGroupRef = useRef()
+  // const SVG = useRef()
+  // const baseGroupRef = useRef()
+  // const backgroundGroupRef = useRef()
+  // const eyesGroupRef = useRef()
+  // const mouthGroupRef = useRef()
+  // const headGroupRef = useRef()
+  // const clothingGroupRef = useRef()
+  // const backGroupRef = useRef()
   const GATEWAY = `https://ipfs.io/ipfs/`
   const CID = `bafybeihqjtxnlkqwykthnj7idx6ytivmyttjcm4ckuljlkkauh6nm3lzve`
   const BASE_URL = `./dracos-nfts/` //`https://aratta.dev/dracos-nfts/` //`${GATEWAY}${CID}/` // `http://localhost/luxgenerator/src/assets/pepito-pfp/` //`http://localhost/luxgenerator/src/assets/pepito-pfp/` //`${GATEWAY}${CID}/` // Or
@@ -90,9 +90,18 @@ function Home() {
     //   a.remove()
     // URL.revokeObjectURL(url)
   }
-
+  /**
+            <g ref={backgroundGroupRef} name={`backgroundGroup`} />
+            <g ref={backGroupRef} name={`backGroup`} />
+            <g ref={baseGroupRef} name={`baseGroup`} />
+            <g ref={clothingGroupRef} name={`clothingGroup`} />
+            <g ref={eyesGroupRef} name={`eyesGroup`} />
+            <g ref={mouthGroupRef} name={`mouthGroup`} />
+            <g ref={headGroupRef} name={`headGroup`} />  
+ */
   const generate = async (trait) => {
     const svgns = 'http://www.w3.org/2000/svg'
+    const gRef = document.createElementNS(svgns, 'g')
 
     // Clear the board
     // SVG.current.innerHTML = ''
@@ -105,6 +114,7 @@ function Home() {
     reader.readAsDataURL(blob)
     reader.onloadend = () => {
       const base64data = reader.result
+
       const image = document.createElementNS(svgns, 'image')
       image.setAttribute('href', base64data)
       image.setAttribute('width', 400)
@@ -116,51 +126,36 @@ function Home() {
       // Add to the group
       switch (trait) {
         case `base`:
-          baseGroupRef.current.innerHTML = ''
-          baseGroupRef.current.appendChild(image)
+          gRef.appendChild(image)
           break
         case `background`:
-          backgroundGroupRef.current.innerHTML = ''
-          backgroundGroupRef.current.appendChild(image)
+          gRef.appendChild(image)
           break
         case `eyes`:
-          eyesGroupRef.current.innerHTML = ''
-          eyesGroupRef.current.appendChild(image)
+          gRef.appendChild(image)
           break
         case `mouth`:
-          mouthGroupRef.current.innerHTML = ''
-          mouthGroupRef.current.appendChild(image)
+          gRef.appendChild(image)
           break
         case `head`:
-          headGroupRef.current.innerHTML = ''
-          headGroupRef.current.appendChild(image)
+          gRef.appendChild(image)
           break
         case `clothing`:
-          clothingGroupRef.current.innerHTML = ''
-          clothingGroupRef.current.appendChild(image)
+          gRef.appendChild(image)
           break
         case `back`:
-          backGroupRef.current.innerHTML = ''
-          backGroupRef.current.appendChild(image)
+          gRef.appendChild(image)
           break
         default:
           break
       }
     }
+
     await sleep(1000)
-    return randomTrait
+    return [randomTrait, gRef]
   }
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
-
-  const generateMetadata = async (base, background, eyes, mouth, head, clothing, back) => {
-    const uploadResult = await upload()
-    // console.log(`uploadResult => `, uploadResult)
-    const verifiableUrl = await rAsset(uploadResult[1])
-    // console.log(`verifiableUrl:`, verifiableUrl)
-    //  console.log(_.keccak256(verifiableUrl))
-    return [uploadResult[0], verifiableUrl]
-  }
 
   const rAsset = async (cid) => {
     const assetBuffer = await fetch(`${cid}`, {
@@ -175,8 +170,8 @@ function Home() {
     return assetBuffer
   }
 
-  const upload = async () => {
-    const htmlStr = document.querySelector(`.${styles['board']} svg`).outerHTML
+  const upload = async (htmlStr) => {
+    // const htmlStr = document.querySelector(`.${styles['board']} svg`).outerHTML
     const blob = new Blob([htmlStr], { type: 'image/svg+xml' })
     const url = URL.createObjectURL(blob)
 
@@ -186,24 +181,11 @@ function Home() {
       const upload = await pinata.upload.file(file)
       // console.log(upload)
       toast.dismiss(t)
+      console.log()
       return [upload.IpfsHash, url]
     } catch (error) {
       console.log(error)
     }
-  }
-
-  const generateOne = async () => {
-    const background = await generate(`background`)
-    const back = await generate(`back`)
-    const base = await generate(`base`)
-    const clothing = await generate(`clothing`)
-    const eyes = await generate(`eyes`)
-    const mouth = await generate(`mouth`)
-    const head = await generate(`head`)
-
-    // document.querySelector(`#result`).innerHTML = `Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`
-
-    generateMetadata(base, background, eyes, mouth, head, clothing, back)
   }
 
   const getTotalSupply = async () => await contractReadonly.methods.totalSupply().call()
@@ -220,6 +202,15 @@ function Home() {
 
     const createToast = toast.loading(`Just a moment while we create your awesome new PFP!`)
 
+    // Create the SVG
+    const svgns = 'http://www.w3.org/2000/svg'
+
+    var svg = document.createElementNS(svgns, 'svg')
+    svg.setAttribute('viewbox', '0 0 400 400')
+    svg.setAttribute('xmlns', svgns)
+    svg.setAttribute('width', '400px')
+    svg.setAttribute('height', '400px')
+
     const background = await generate(`background`)
     const back = await generate(`back`)
     const base = await generate(`base`)
@@ -228,97 +219,108 @@ function Home() {
     const mouth = await generate(`mouth`)
     const head = await generate(`head`)
 
+    svg.appendChild(background[1])
+    svg.appendChild(back[1])
+    svg.appendChild(base[1])
+    svg.appendChild(clothing[1])
+    svg.appendChild(eyes[1])
+    svg.appendChild(mouth[1])
+    svg.appendChild(head[1])
+
+    // document.body.appendChild(svg)
+
     let attributes = []
-    if (base.toUpperCase() !== `NONE`) attributes.push({ key: 'Base', value: base.toUpperCase() })
-    if (background.toUpperCase() !== `NONE`) attributes.push({ key: 'Background', value: background.toUpperCase() })
-    if (eyes.toUpperCase() !== `NONE`) attributes.push({ key: 'Eyes', value: eyes.toUpperCase() })
-    if (mouth.toUpperCase() !== `NONE`) attributes.push({ key: 'Mouth', value: mouth.toUpperCase() })
-    if (head.toUpperCase() !== `NONE`) attributes.push({ key: 'Head', value: head.toUpperCase() })
-    if (clothing.toUpperCase() !== `NONE`) attributes.push({ key: 'Clothing', value: clothing.toUpperCase() })
-    if (back.toUpperCase() !== `NONE`) attributes.push({ key: 'Back', value: back.toUpperCase() })
+    if (base[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Base', value: base[0].toUpperCase() })
+    if (background[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Background', value: background[0].toUpperCase() })
+    if (eyes[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Eyes', value: eyes[0].toUpperCase() })
+    if (mouth[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Mouth', value: mouth[0].toUpperCase() })
+    if (head[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Head', value: head[0].toUpperCase() })
+    if (clothing[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Clothing', value: clothing[0].toUpperCase() })
+    if (back[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Back', value: back[0].toUpperCase() })
 
-    // console.log(`Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`)
-    generateMetadata(base, background, eyes, mouth, head, clothing, back).then((result) => {
-      toast.dismiss(createToast)
-      const t = toast.loading(`Waiting for transaction's confirmation`)
+    const uploadResult = await upload(svg.outerHTML)
+    // console.log(`uploadResult => `, uploadResult)
+    const verifiableUrl = await rAsset(uploadResult[1]) //uploadResult[1]
 
-      const metadata = JSON.stringify({
-        LSP4Metadata: {
-          name: 'Dracos',
-          description: `Forged in the molten heart of the Ember Rift, the Dracos are a legendary brood born from the mystical Feralyx Eggs. Each Dragon is infused with the raw power of fire, chaos and untamed greed. Hatched in the infernal chasms of the Rift, these dragons rise as supreme guardians of gold treasure and ancient magic.
+    toast.dismiss(createToast)
+    const t = toast.loading(`Waiting for transaction's confirmation`)
+
+    const metadata = JSON.stringify({
+      LSP4Metadata: {
+        name: 'Dracos',
+        description: `Forged in the molten heart of the Ember Rift, the Dracos are a legendary brood born from the mystical Feralyx Eggs. Each Dragon is infused with the raw power of fire, chaos and untamed greed. Hatched in the infernal chasms of the Rift, these dragons rise as supreme guardians of gold treasure and ancient magic.
 
 Every dragon is an embodiment of power, adorned with unique traits and hoarded relics from civilizations long forgotten. As the eternal keepers of this realm, they are bound to the Ember Rift, where their glory, fury and insatiable hunger for treasure shape the fate of all who dare enter.
 
 🔥 7,777 Dracos: Born from the Rift, Bound by Gold 🪙`,
-          links: [
-            { title: 'Mint', url: 'https://universaleverything.io/0x8A985fe01eA908F5697975332260553c454f8F77' },
-            { title: '𝕏', url: 'https://x.com/DracosKodo' },
-          ],
-          attributes: attributes,
-          icon: [
+        links: [
+          { title: 'Mint', url: 'https://universaleverything.io/0x8A985fe01eA908F5697975332260553c454f8F77' },
+          { title: '𝕏', url: 'https://x.com/DracosKodo' },
+        ],
+        attributes: attributes,
+        icon: [
+          {
+            width: 512,
+            height: 512,
+            url: 'ipfs://bafybeiaziuramvgnceele5wetw5tt65bgp2z63faax7ihvrjd4wlvfsooq',
+            verification: {
+              method: 'keccak256(bytes)',
+              data: '0xe99121bbedf99dcf763f1a216ca8cd5847bce15e6930df1e92913c56367f92d1',
+            },
+          },
+        ],
+        backgroundImage: [],
+        assets: [],
+        images: [
+          [
             {
-              width: 512,
-              height: 512,
-              url: 'ipfs://bafybeiaziuramvgnceele5wetw5tt65bgp2z63faax7ihvrjd4wlvfsooq',
+              width: 1000,
+              height: 1000,
+              url: `ipfs://${uploadResult[0]}`,
               verification: {
                 method: 'keccak256(bytes)',
-                data: '0xe99121bbedf99dcf763f1a216ca8cd5847bce15e6930df1e92913c56367f92d1',
+                data: _.keccak256(verifiableUrl),
               },
             },
           ],
-          backgroundImage: [],
-          assets: [],
-          images: [
-            [
-              {
-                width: 1000,
-                height: 1000,
-                url: `ipfs://${result[0]}`,
-                verification: {
-                  method: 'keccak256(bytes)',
-                  data: _.keccak256(result[1]),
-                },
-              },
-            ],
-          ],
-        },
-      })
-
-      try {
-        contract.methods
-          .handleMint(metadata)
-          .send({
-            from: auth.accounts[0],
-            value: freeMintCount > 0 ? 0 : mintPrice,
-          })
-          .then((res) => {
-            console.log(res)
-
-            toast.success(`Done`)
-            toast.dismiss(t)
-            e.target.disabled = false
-
-            showSwipe()
-
-            getTotalSupply().then((res) => {
-              console.log(res)
-              setTotalSupply(_.toNumber(res))
-            })
-
-            getMaxSupply().then((res) => {
-              console.log(res)
-              setMaxSupply(_.toNumber(res))
-            })
-          })
-          .catch((error) => {
-            console.log(error)
-            toast.dismiss(t)
-          })
-      } catch (error) {
-        console.log(error)
-        toast.dismiss(t)
-      }
+        ],
+      },
     })
+
+    try {
+      contract.methods
+        .handleMint(metadata)
+        .send({
+          from: auth.accounts[0],
+          value: freeMintCount > 0 ? 0 : mintPrice,
+        })
+        .then((res) => {
+          console.log(res)
+
+          toast.success(`Done`)
+          toast.dismiss(t)
+          e.target.disabled = false
+
+          showSwipe()
+
+          getTotalSupply().then((res) => {
+            console.log(res)
+            setTotalSupply(_.toNumber(res))
+          })
+
+          getMaxSupply().then((res) => {
+            console.log(res)
+            setMaxSupply(_.toNumber(res))
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+          toast.dismiss(t)
+        })
+    } catch (error) {
+      console.log(error)
+      toast.dismiss(t)
+    }
   }
 
   const swipe = async (e, tokenId) => {
@@ -327,6 +329,15 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
 
     const t = toast.loading(`Waiting for transaction's confirmation`)
 
+    // Create the SVG
+    const svgns = 'http://www.w3.org/2000/svg'
+
+    var svg = document.createElementNS(svgns, 'svg')
+    svg.setAttribute('viewbox', '0 0 400 400')
+    svg.setAttribute('xmlns', svgns)
+    svg.setAttribute('width', '400px')
+    svg.setAttribute('height', '400px')
+
     const background = await generate(`background`)
     const back = await generate(`back`)
     const base = await generate(`base`)
@@ -335,58 +346,73 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     const mouth = await generate(`mouth`)
     const head = await generate(`head`)
 
-    let attributes = []
-    if (base.toUpperCase() !== `NONE`) attributes.push({ key: 'Base', value: base.toUpperCase() })
-    if (background.toUpperCase() !== `NONE`) attributes.push({ key: 'Background', value: background.toUpperCase() })
-    if (eyes.toUpperCase() !== `NONE`) attributes.push({ key: 'Eyes', value: eyes.toUpperCase() })
-    if (mouth.toUpperCase() !== `NONE`) attributes.push({ key: 'Mouth', value: mouth.toUpperCase() })
-    if (head.toUpperCase() !== `NONE`) attributes.push({ key: 'Head', value: head.toUpperCase() })
-    if (clothing.toUpperCase() !== `NONE`) attributes.push({ key: 'Clothing', value: clothing.toUpperCase() })
-    if (back.toUpperCase() !== `NONE`) attributes.push({ key: 'Back', value: back.toUpperCase() })
+    svg.appendChild(background[1])
+    svg.appendChild(back[1])
+    svg.appendChild(base[1])
+    svg.appendChild(clothing[1])
+    svg.appendChild(eyes[1])
+    svg.appendChild(mouth[1])
+    svg.appendChild(head[1])
 
-    console.log(`Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`)
-    generateMetadata(base, background, eyes, mouth, head, clothing, back).then((result) => {
-      const metadata = JSON.stringify({
-        LSP4Metadata: {
-          name: 'Dracos',
-          description: `Forged in the molten heart of the Ember Rift, the Dracos are a legendary brood born from the mystical Feralyx Eggs. Each Dragon is infused with the raw power of fire, chaos and untamed greed. Hatched in the infernal chasms of the Rift, these dragons rise as supreme guardians of gold treasure and ancient magic.
+    // document.body.appendChild(svg)
+
+    let attributes = []
+    if (base[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Base', value: base[0].toUpperCase() })
+    if (background[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Background', value: background[0].toUpperCase() })
+    if (eyes[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Eyes', value: eyes[0].toUpperCase() })
+    if (mouth[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Mouth', value: mouth[0].toUpperCase() })
+    if (head[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Head', value: head[0].toUpperCase() })
+    if (clothing[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Clothing', value: clothing[0].toUpperCase() })
+    if (back[0].toUpperCase() !== `NONE`) attributes.push({ key: 'Back', value: back[0].toUpperCase() })
+
+    const uploadResult = await upload(svg.outerHTML)
+    // console.log(`uploadResult => `, uploadResult)
+    const verifiableUrl = await rAsset(uploadResult[1]) //uploadResult[1]
+
+    // console.log(`Base: ${base} | Background: ${background}  | Eyes: ${eyes} |  Mouth: ${mouth}  | Head: ${head}  | Clothing: ${clothing}  | Back: ${back}`)
+
+    const metadata = JSON.stringify({
+      LSP4Metadata: {
+        name: 'Dracos',
+        description: `Forged in the molten heart of the Ember Rift, the Dracos are a legendary brood born from the mystical Feralyx Eggs. Each Dragon is infused with the raw power of fire, chaos and untamed greed. Hatched in the infernal chasms of the Rift, these dragons rise as supreme guardians of gold treasure and ancient magic.
 
 Every dragon is an embodiment of power, adorned with unique traits and hoarded relics from civilizations long forgotten. As the eternal keepers of this realm, they are bound to the Ember Rift, where their glory, fury and insatiable hunger for treasure shape the fate of all who dare enter.
 
 🔥 7,777 Dracos: Born from the Rift, Bound by Gold 🪙`,
-          links: [
-            { title: 'Mint', url: 'https://universaleverything.io/0x8A985fe01eA908F5697975332260553c454f8F77' },
-            { title: '𝕏', url: 'https://x.com/DracosKodo' },
-          ],
-          attributes: attributes,
-          icon: [
+        links: [
+          { title: 'Mint', url: 'https://universaleverything.io/0x8A985fe01eA908F5697975332260553c454f8F77' },
+          { title: '𝕏', url: 'https://x.com/DracosKodo' },
+        ],
+        attributes: attributes,
+        icon: [
+          {
+            width: 512,
+            height: 512,
+            url: 'ipfs://bafybeiaziuramvgnceele5wetw5tt65bgp2z63faax7ihvrjd4wlvfsooq',
+            verification: {
+              method: 'keccak256(bytes)',
+              data: '0xe99121bbedf99dcf763f1a216ca8cd5847bce15e6930df1e92913c56367f92d1',
+            },
+          },
+        ],
+        backgroundImage: [],
+        assets: [],
+        images: [
+          [
             {
-              width: 512,
-              height: 512,
-              url: 'ipfs://bafybeiaziuramvgnceele5wetw5tt65bgp2z63faax7ihvrjd4wlvfsooq',
+              width: 1000,
+              height: 1000,
+              url: `ipfs://${uploadResult[0]}`,
               verification: {
                 method: 'keccak256(bytes)',
-                data: '0xe99121bbedf99dcf763f1a216ca8cd5847bce15e6930df1e92913c56367f92d1',
+                data: _.keccak256(verifiableUrl),
               },
             },
           ],
-          backgroundImage: [],
-          assets: [],
-          images: [
-            [
-              {
-                width: 1000,
-                height: 1000,
-                url: `ipfs://${result[0]}`,
-                verification: {
-                  method: 'keccak256(bytes)',
-                  data: _.keccak256(result[1]),
-                },
-              },
-            ],
-          ],
-        },
-      })
+        ],
+      },
+    })
+
 
       try {
         contract.methods
@@ -412,7 +438,8 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
         console.log(error)
         toast.dismiss(t)
       }
-    })
+
+  
   }
 
   const fetchData = async (dataURL) => {
@@ -557,6 +584,22 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
     link.remove()
   }
 
+  const uploadHide = async (htmlStr) => {
+    //const htmlStr = document.querySelector(`.${styles['board']} svg`).outerHTML
+    const blob = new Blob([htmlStr], { type: 'image/svg+xml' })
+    const url = URL.createObjectURL(blob)
+
+    try {
+      const t = toast.loading(`Uploading`)
+      const file = new File([blob], 'test.svg', { type: blob.type })
+      const upload = await pinata.upload.file(file)
+      // console.log(upload)
+      toast.dismiss(t)
+      return [`https://ipfs.io/ipfs/${upload.IpfsHash}`, url]
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(() => {
     console.clear()
 
@@ -579,6 +622,63 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
       console.log(amount)
       setSwipePrice(amount)
     })
+    /*
+        const svgns = 'http://www.w3.org/2000/svg'
+        const image = document.createElementNS(svgns, 'image')
+        image.setAttribute('href', base64data)
+        image.setAttribute('width', 400)
+        image.setAttribute('height', 400)
+        image.setAttribute('x', 0)
+        image.setAttribute('y', 0)
+
+// Get the SVG element object by tag name
+const svg = document.querySelector("svg");
+
+// Create the `style` element in the SVG namespace
+const style = document.createElementNS("http://www.w3.org/2000/svg", "style");
+const node = document.createTextNode("circle {fill: orange;}");
+style.appendChild(node);
+
+// Append the style element to the SVG element
+svg.appendChild(style);
+document.querySelector(`.${styles['board']}`).appendChild (svg);
+
+    const htmlStr = document.querySelector(`.${styles['board']} svg`).outerHTML
+    const blob = new Blob([htmlStr], { type: 'image/svg+xml' })
+    const url = URL.createObjectURL(blob)
+*/
+    // const image = document.createElementNS(svgns, 'image')
+    // image.setAttribute('href', `data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNTAwIj4NCiAgPGZvcmVpZ25PYmplY3QgY2xhc3M9Im5vZGUiIHg9IjQ2IiB5PSIyMiIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIzMDAiPg0KICAgIDxib2R5IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIj4NCiAgICA8aWZyYW1lIHNyYz0iZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQRDk0Yld3Z2RtVnljMmx2YmowaU1TNHdJaUJsYm1OdlpHbHVaejBpVlZSR0xUZ2lJSE4wWVc1a1lXeHZibVU5SW01dklqOCtDanh6ZG1jS0lDQWdlRzFzYm5NNlpHTTlJbWgwZEhBNkx5OXdkWEpzTG05eVp5OWtZeTlsYkdWdFpXNTBjeTh4TGpFdklnb2dJQ0I0Yld4dWN6cGpZejBpYUhSMGNEb3ZMMk55WldGMGFYWmxZMjl0Ylc5dWN5NXZjbWN2Ym5Naklnb2dJQ0I0Yld4dWN6cHlaR1k5SW1oMGRIQTZMeTkzZDNjdWR6TXViM0puTHpFNU9Ua3ZNREl2TWpJdGNtUm1MWE41Ym5SaGVDMXVjeU1pQ2lBZ0lIaHRiRzV6T25OMlp6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lDaUFnSUhodGJHNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUlLSUNBZ2QybGtkR2c5SWpRd2JXMGlDaUFnSUdobGFXZG9kRDBpTkRCdGJTSUtJQ0FnZG1sbGQwSnZlRDBpTUNBd0lEUXdJRFF3SWdvZ0lDQjJaWEp6YVc5dVBTSXhMakVpQ2lBZ0lHbGtQU0p6ZG1jNElqNEtJQ0E4WkdWbWN3b2dJQ0FnSUdsa1BTSmtaV1p6TWlJZ0x6NEtJQ0E4YldWMFlXUmhkR0VLSUNBZ0lDQnBaRDBpYldWMFlXUmhkR0UxSWo0S0lDQWdJRHh5WkdZNlVrUkdQZ29nSUNBZ0lDQThZMk02VjI5eWF3b2dJQ0FnSUNBZ0lDQnlaR1k2WVdKdmRYUTlJaUkrQ2lBZ0lDQWdJQ0FnUEdSak9tWnZjbTFoZEQ1cGJXRm5aUzl6ZG1jcmVHMXNQQzlrWXpwbWIzSnRZWFErQ2lBZ0lDQWdJQ0FnUEdSak9uUjVjR1VLSUNBZ0lDQWdJQ0FnSUNCeVpHWTZjbVZ6YjNWeVkyVTlJbWgwZEhBNkx5OXdkWEpzTG05eVp5OWtZeTlrWTIxcGRIbHdaUzlUZEdsc2JFbHRZV2RsSWlBdlBnb2dJQ0FnSUNBZ0lEeGtZenAwYVhSc1pUNDhMMlJqT25ScGRHeGxQZ29nSUNBZ0lDQThMMk5qT2xkdmNtcytDaUFnSUNBOEwzSmtaanBTUkVZK0NpQWdQQzl0WlhSaFpHRjBZVDRLSUNBOFp3b2dJQ0FnSUdsa1BTSnNZWGxsY2pFaUNpQWdJQ0FnZEhKaGJuTm1iM0p0UFNKMGNtRnVjMnhoZEdVb0xUWTVMalU0TURNMkxDMDRNaTQwTXpFMU5ERXBJajRLSUNBZ0lEeGphWEpqYkdVS0lDQWdJQ0FnSUhOMGVXeGxQU0ptYVd4c09pTm1aakF3TURBN1ptbHNiQzF5ZFd4bE9tVjJaVzV2WkdRN2MzUnliMnRsTFhkcFpIUm9PakF1TWpZME5UZ3pJZ29nSUNBZ0lDQWdhV1E5SW5CaGRHZ3hNQ0lLSUNBZ0lDQWdJR040UFNJNE9TNDFPREF6TmlJS0lDQWdJQ0FnSUdONVBTSXhNREl1TkRNeE5UUWlDaUFnSUNBZ0lDQnlQU0l5TUNJZ0x6NEtJQ0E4TDJjK0Nqd3ZjM1puUGdvPSI+DQogIFdJTEwgQkUgQUJTVVJEIHRoZSAiaWZyYW1lIiB0YWcgaXMgbm90IHN1cHBvcnRlZCBieSB5b3VyIGJyb3dzZXIuDQo8L2lmcmFtZT4NCiAgICA8L2JvZHk+DQogIDwvZm9yZWlnbk9iamVjdD4NCjwvc3ZnPg==`);
+    // image.setAttribute('width', 400)
+    // image.setAttribute('height', 400)
+    // image.setAttribute('x', 0)
+    // image.setAttribute('y', 0)
+    /*
+    const svgns = 'http://www.w3.org/2000/svg'
+
+    var svg = document.createElementNS(svgns, "svg");
+    svg.setAttribute('viewbox', '0 0 240 240');
+    svg.setAttribute('width', '240px');
+    svg.setAttribute('height', '240px');
+    svg.setAttribute('id', 'svgTest');
+    svg.setAttribute("xmlns", svgns);
+
+    const circle = document.createElementNS(svgns, 'circle')
+    circle.setAttribute('cx', 120)
+    circle.setAttribute('cy', 120)
+    circle.setAttribute('r', 100)
+    circle.setAttribute('fill', `red`)
+    svg.appendChild(circle)
+
+
+    document.body.appendChild(svg)
+
+    const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml' })
+    const url = URL.createObjectURL(blob)
+    console.log(url)
+
+    uploadHide(svg.outerHTML).then(console.log)//document.querySelector(`#svgTest`).outerHTML
+    */
   }, [])
 
   return (
@@ -613,7 +713,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
                     </div>
                     <div className={`d-flex flex-column`}>
                       <b>{3 - swipeCount} swipes left</b>
-                      <b style={{fontSize:`10px`, opacity:.7}}>Your Dracos is waiting!</b>
+                      <b style={{ fontSize: `10px`, opacity: 0.7 }}>Your Dracos is waiting!</b>
                     </div>
                   </li>
                   <li>
@@ -819,20 +919,27 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
             </main>
 
             <footer className={`${styles.footer} grid grid--fit ms-motion-slideDownIn`} style={{ '--data-width': '200px' }}>
-              <button onClick={(e) => mint(e)} disabled={!auth.walletConnected} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>
+              <button
+                onClick={(e) => mint(e)} //disabled={!auth.walletConnected}
+                className={`d-f-c animate__animated animate__bounceInUp animate__fast`}
+              >
                 Mint
                 {auth.walletConnected && <Whitelist setFreeMintCount={setFreeMintCount} />}
               </button>
               <button onClick={(e) => showSwipe(e)} disabled={!auth.walletConnected} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>
                 Swipe
               </button>
-              <button onClick={(e) => showWhitelistModal(e)} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>Whitelist Checker</button>
-              <button onClick={(e) => showSwipeCheckerModal(e)} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>Swipe Checker</button>
+              <button onClick={(e) => showWhitelistModal(e)} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>
+                Whitelist Checker
+              </button>
+              <button onClick={(e) => showSwipeCheckerModal(e)} className={`d-f-c animate__animated animate__bounceInUp animate__fast`}>
+                Swipe Checker
+              </button>
             </footer>
           </>
         )}
 
-        <div className={`${styles['board']} d-f-c card`}>
+        {/* <div className={`${styles['board']} d-f-c card`}>
           <svg ref={SVG} viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
             <g ref={backgroundGroupRef} name={`backgroundGroup`} />
             <g ref={backGroupRef} name={`backGroup`} />
@@ -842,7 +949,7 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
             <g ref={mouthGroupRef} name={`mouthGroup`} />
             <g ref={headGroupRef} name={`headGroup`} />
           </svg>
-        </div>
+        </div> */}
       </div>
     </>
   )
@@ -865,11 +972,7 @@ const Whitelist = ({ setFreeMintCount }) => {
     })
 
   if (status !== `loading`) {
-    return (
-      <div className={`${styles['freeMint']} ms-fontWeight-bold`}>
-       {count}
-      </div>
-    )
+    return <div className={`${styles['freeMint']} ms-fontWeight-bold`}>{count}</div>
   } else return <small>Loading ...</small>
 }
 
