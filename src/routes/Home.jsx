@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router'
 
 const pinata = new PinataSDK({
   pinataJwt: import.meta.env.VITE_PINATA_API_KEY,
-  pinataGateway: 'example-gateway.mypinata.cloud',
+  pinataGateway: 'https://gateway.pinata.cloud/ipfs/',
 })
 
 function Home() {
