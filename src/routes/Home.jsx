@@ -413,33 +413,30 @@ Every dragon is an embodiment of power, adorned with unique traits and hoarded r
       },
     })
 
+    try {
+      contract.methods
+        .handleSwipe(tokenId, metadata)
+        .send({
+          from: auth.accounts[0],
+          value: swipePrice,
+        })
+        .then((res) => {
+          console.log(res)
 
-      try {
-        contract.methods
-          .handleSwipe(tokenId, metadata)
-          .send({
-            from: auth.accounts[0],
-            value: swipePrice,
-          })
-          .then((res) => {
-            console.log(res)
+          toast.success(`Done`)
+          toast.dismiss(t)
 
-            toast.success(`Done`)
-            toast.dismiss(t)
-
-            handleTokenDetail(tokenId)
-            //  showSwipe()
-          })
-          .catch((error) => {
-            console.log(error)
-            toast.dismiss(t)
-          })
-      } catch (error) {
-        console.log(error)
-        toast.dismiss(t)
-      }
-
-  
+          handleTokenDetail(tokenId)
+          //  showSwipe()
+        })
+        .catch((error) => {
+          console.log(error)
+          toast.dismiss(t)
+        })
+    } catch (error) {
+      console.log(error)
+      toast.dismiss(t)
+    }
   }
 
   const fetchData = async (dataURL) => {
@@ -828,7 +825,7 @@ document.querySelector(`.${styles['board']}`).appendChild (svg);
                       <div key={i} className={`${styles.token} d-f-c flex-column ms-depth-16`} onClick={(e) => handleTokenDetail(item.tokenId)}>
                         {/* <embed type="image/svg+xml" style={{ pointerEvents: ` none` }} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                          */}
-                        <img className={`${styles.PFP}`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
+                        <img className={`${styles.PFP}`} crossOrigin={`anonymous`} src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                         {/* <object data={`https://ipfs.io/ipfs/bafybeifkvtmwqzjfpqjkd5jetjh7u7b6ixs36fwjvydne3s6sceduwn3g4`} type="image/svg+xml">
                           <img src={`${import.meta.env.VITE_IPFS_GATEWAY}${item.LSP4Metadata.images[0][0].url.replace('ipfs://', '').replace('://', '')}`} />
                         </object> */}
